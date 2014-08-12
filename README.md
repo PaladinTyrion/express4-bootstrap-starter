@@ -13,7 +13,8 @@ Lightweight Bootstrap NodeJS Apps Build Using ExpressJS 4, MongoDB/Mongoose, Aut
 ## Install
 
 ### Prerequisites
-- Node.js - Download and Install Node.js with [NVM](https://github.com/creationix/nvm) (Node Version Manager) - Simple bash script to manage multiple active node.js versions.
+- Node.js - Download and Install Node.js with [n](https://github.com/visionmedia/n) (Node Version Manager) - Simple module to manage multiple active node.js versions.
+**NOTE:** This project uses node v0.10.28.
 - MongoDB - Download and Install [MongoDB](http://www.mongodb.org/) - Make sure it's running on the default port.
 
 ### Tool Prerequisites
@@ -28,9 +29,12 @@ Lightweight Bootstrap NodeJS Apps Build Using ExpressJS 4, MongoDB/Mongoose, Aut
 **NOTE:**
 After installing  Node.js and MongoDB server has running, then its time to running your server.
 
+**NOTE:**
 Need installing grunt-cli -g. It refers to http://blog.csdn.net/lihongxun945/article/details/8895208 and http://www.gruntjs.org/.
 
+ ```
   $ npm install -g grunt-cli
+```
 
 ```
   $ git clone git@github.com:aredo/express4-bootstrap-starter.git
