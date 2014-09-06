@@ -13,27 +13,27 @@ var _ = require('lodash');
  * POST : '/api/trick/create'
  */
 exports.create = function (req, res, next) {
-  var trick = new Trick(req.body)
-  trick.user = req.user
+  var trick = new Trick(req.body);
+  trick.user = req.user;
 
   trick.screenShoot(req.body.origin_url, function (err) {
     if (!err) {
       return res.jsonp(trick);
     } else {
-      var errPrint     = {}
-      errPrint.status  = 400
+      var errPrint     = {};
+      errPrint.status  = 400;
 
       if ( err.code == 11000 ) {
         errPrint.message = 'Trick with title '+ trick.title + 'already exist';
       } else {
-        errPrint.message = err.message
+        errPrint.message = err.message;
       }
 
-      errPrint.data    = err.errors
-      return res.send(400, errPrint)
+      errPrint.data    = err.errors;
+      return res.send(400, errPrint);
     }
   })
-}
+};
 
 exports.getAll = function( req, res, next) {
 
@@ -55,15 +55,15 @@ exports.getAll = function( req, res, next) {
 
       if(err) {
         errorHelper.mongoose(res, err);
-      };
+      }
 
-      var resultPrint     = {}
-      resultPrint.status  = 200
-      resultPrint.message = 'success'
-      resultPrint.data    = tricks
-      return res.json(200, resultPrint)
+      var resultPrint     = {};
+      resultPrint.status  = 200;
+      resultPrint.message = 'success';
+      resultPrint.data    = tricks;
+      return res.json(200, resultPrint);
     })
-}
+};
 
 exports.listTrickByUser = function( req, res, next) {
 
@@ -87,31 +87,31 @@ exports.listTrickByUser = function( req, res, next) {
 
       if(err) {
         errorHelper.mongoose(res, err);
-      };
+      }
 
       Trick.count({user : user_id}, function (err, count) {
 
-        var resultPrint          = {}
-        resultPrint.status       = 200
-        resultPrint.message      = 'success'
-        resultPrint.tricks       = tricks
-        resultPrint.tricks_count = count
+        var resultPrint          = {};
+        resultPrint.status       = 200;
+        resultPrint.message      = 'success';
+        resultPrint.tricks       = tricks;
+        resultPrint.tricks_count = count;
         return res.json(200, resultPrint)
 
       });
 
     })
-}
+};
 
 exports.screenShootUrl = function(req, res) {
   var Url = req.query.origin_url;
 
   if(Url) {
     var opts = {
-        format:'png'
-      , width: 1280
-      , height: 960
-    }
+        format:'png',
+        width: 1280,
+        height: 960
+    };
 
     var makeSalt = Math.round((new Date().valueOf() * Math.random())) + '';
 
@@ -128,7 +128,7 @@ exports.screenShootUrl = function(req, res) {
             .capture(function(err, img) {
 
               if (err) {
-                renderDefaultImage(res)
+                renderDefaultImage(res);
                 // throw err;
               }
               res.set('Content-Type', 'image/png');
@@ -141,7 +141,7 @@ exports.screenShootUrl = function(req, res) {
   } else {
     renderDefaultImage(res);
   }
-}
+};
 
 
 var renderDefaultImage = function (res) {
@@ -152,4 +152,4 @@ var renderDefaultImage = function (res) {
   readStream.on('data', function(data) {
     res.send(new Buffer(data));
   });
-}
+};

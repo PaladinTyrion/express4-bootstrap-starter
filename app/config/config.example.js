@@ -1,8 +1,8 @@
 // config for the express app
 // depending on `process.env.NODE_ENV`, default is `development`
 
-var path = require('path')
-  , rootPath = path.normalize(__dirname + '/../..')
+var path = require('path'),
+    rootPath = path.normalize(__dirname + '/../..');
 
 var config = {
   // Development config
@@ -10,7 +10,7 @@ var config = {
   development: {
     server: {
       port: 3001,
-      hostname: 'localhost',
+      hostname: 'localhost'
     },
     database: {
       url: 'mongodb://localhost/express4_bootstrap_starter'
@@ -45,7 +45,7 @@ var config = {
   production: {
     server: {
       port: 3001,
-      hostname: process.env.HOSTNAME || '127.0.0.1',
+      hostname: process.env.HOSTNAME || '127.0.0.1'
     },
     database: {
       url: 'mongodb://localhost/express4_bootstrap_starter'

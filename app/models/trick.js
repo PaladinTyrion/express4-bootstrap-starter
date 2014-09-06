@@ -26,9 +26,7 @@ var Trick = new Schema({
       ref : 'User'
     },
     tags: [
-      {
-        type: String
-      }
+      { type: String }
     ],
     description: {
       type: String
@@ -67,7 +65,7 @@ Trick.methods = {
 
   screenShoot: function (url, cb) {
 
-    if (!url || !url.length) return this.save(cb)
+    if (!url || !url.length) return this.save(cb);
 
     var self = this;
 
@@ -76,10 +74,10 @@ Trick.methods = {
       if (err) return cb(err);
 
       var opts = {
-          format:'png'
-        , width: 1280
-        , height: 960
-      }
+          format:'png',
+          width: 1280,
+          height: 960
+      };
 
       var makeSalt = Math.round((new Date().valueOf() * Math.random())) + '';
 
@@ -100,9 +98,9 @@ Trick.methods = {
         self.save(cb);
       // });
 
-    })
-  },
-}
+    });
+  }
+};
 
 Trick.statics = {
 
@@ -117,7 +115,7 @@ Trick.statics = {
   load: function (id, cb) {
     this.findOne({ _id : id })
       .populate('user', 'email username photo_profile')
-      .exec(cb)
+      .exec(cb);
   },
 
   /**
@@ -129,15 +127,15 @@ Trick.statics = {
    */
 
   list: function (options, cb) {
-    var criteria = options.criteria || {}
+    var criteria = options.criteria || {};
 
     this.find(criteria)
       .populate('user', 'username photo_profile')
       .sort({'createdAt': -1}) // sort by date
       .limit(options.perPage)
       .skip(options.perPage * options.page)
-      .exec(cb)
+      .exec(cb);
   }
-}
+};
 
-module.exports = mongoose.model('Trick', Trick)
+module.exports = mongoose.model('Trick', Trick);

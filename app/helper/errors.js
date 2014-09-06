@@ -11,8 +11,8 @@ var error_results = {};
  */
 
 exports.proper = function (errors) {
-  var keys = Object.keys(errors)
-  var errs = []
+  var keys = Object.keys(errors);
+  var errs = [];
 
   // if there is no validation error, just display a generic error
   if (!keys) {
@@ -21,30 +21,30 @@ exports.proper = function (errors) {
 
   keys.forEach(function (key) {
     errs.push(errors[key].message)
-  })
+  });
 
-  return errs
-}
+  return errs;
+};
 
 
 exports.mongoose = function (res, err) {
   var status = 500;
 
   if ( err.code == 11000 ) {
-    status = status || 409
+    status = status || 409;
   }
 
-  error_results.status  = status
-  error_results.message = err.message
-  error_results.data    = err.errors
+  error_results.status  = status;
+  error_results.message = err.message;
+  error_results.data    = err.errors;
 
-  return res.json(status, error_results)
-}
+  return res.json(status, error_results);
+};
 
 exports.custom = function (res, err) {
   var status = err.code || err.status;
 
-  error_results.status  = status
-  error_results.message = err.msg || err.message
-  return res.json(status, error_results)
-}
+  error_results.status  = status;
+  error_results.message = err.msg || err.message;
+  return res.json(status, error_results);
+};

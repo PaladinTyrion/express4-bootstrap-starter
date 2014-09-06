@@ -14,7 +14,7 @@ var login = function (req, res) {
   delete req.session.returnTo
   req.flash('success', { msg: 'Success! You are logged in.' });
   res.redirect(redirectTo)
-}
+};
 
 exports.signin = function (req, res) {}
 
@@ -37,7 +37,7 @@ exports.login = function (req, res) {
       message: req.flash('error')
     })
   }
-}
+};
 
 /**
  * Show sign up form
@@ -52,51 +52,51 @@ exports.signup = function (req, res) {
       user: new User()
     })
   }
-}
+};
 
 /**
  * Logout
  */
 
 exports.logout = function (req, res) {
-  req.logout()
+  req.logout();
   req.flash('success', { msg: 'Success! You are logout' });
-  res.redirect('/')
-}
+  res.redirect('/');
+};
 
 /**
  * Session
  */
 
-exports.session = login
+exports.session = login;
 
 /**
  * Create user
  */
 
 exports.create = function (req, res, next) {
-  var user = new User(req.body)
-  user.provider = 'local'
+  var user = new User(req.body);
+  user.provider = 'local';
   user.save(function (err, new_user) {
     if (err) {
       return res.render('users/signup', {
         errors: errorHelper.proper(err.errors),
         user: user,
         title: 'Sign up'
-      })
+      });
     } else {
-      console.log(user)
+      console.log(user);
       // manually login the user once successfully signed up
       req.logIn(user, function(err) {
         if (err) {
-          console.log(err)
-          return next(err)
+          console.log(err);
+          return next(err);
         }
-        return res.redirect('/dashboard')
-      })
+        return res.redirect('/dashboard');
+      });
     }
-  })
-}
+  });
+};
 
 /**
  *  Show
@@ -107,8 +107,8 @@ exports.show = function (req, res, next) {
   res.render('users/show', {
     title: user.name,
     user: user
-  })
-}
+  });
+};
 
 
 /**
@@ -122,21 +122,21 @@ exports.user_profile = function (req, res, next) {
     function (callback) {
       if(req.user) {
         if (username === req.user.username) {
-          callback(null, req.user)
+          callback(null, req.user);
         } else {
           User.findOne({username : username}, function(err, user) {
-            callback(err, user)
-          })
+            callback(err, user);
+          });
         }
       } else {
         User.findOne({username : username}, function(err, user) {
-          callback(err, user)
-        })
+          callback(err, user);
+        });
       }
     }], function (err, user) {
       if (err) {
-        console.log(err)
-        return next(err)
+        console.log(err);
+        return next(err);
       }
       if(!user) {
         // res.render('users/not-found', {
@@ -146,23 +146,23 @@ exports.user_profile = function (req, res, next) {
 
       } else {
         if(user.photo_profile === undefined) {
-          user.photo_profile = 'https://gravatar.com/avatar/' + utility.md5(user.email) + '?s=200&d=retro'
+          user.photo_profile = 'https://gravatar.com/avatar/' + utility.md5(user.email) + '?s=200&d=retro';
         }
 
         res.render('users/show', {
           title: user.name,
           user: user
-        })
+        });
       }
 
-    })
-}
+    });
+};
 
 exports.getForgotPassword = function (req, res) {
   res.render('users/forgot-password', {
     title: 'Forgot Password'
   });
-}
+};
 
 
 exports.postForgotPassword = function (req, res) {
@@ -189,11 +189,11 @@ exports.postForgotPassword = function (req, res) {
         });
       });
     }, function(token, user, next) {
-        user.url_reset_password = req.protocol + '://' + req.headers.host + '/reset/' + token
+        user.url_reset_password = req.protocol + '://' + req.headers.host + '/reset/' + token;
 
         Mailer.sendOne('forgot-password', "Trick.JS - Password Reset", user, function (err, responseStatus, html, text){
           next(err, responseStatus);
-        })
+        });
       }
     ], function(err) {
       if (err) {
@@ -202,7 +202,7 @@ exports.postForgotPassword = function (req, res) {
       }
       return res.json({message: 'success', status: 200});
     });
-}
+};
 
 
 exports.getResetPassword = function (req, res) {
@@ -218,9 +218,9 @@ exports.getResetPassword = function (req, res) {
         req.flash('errors', { msg: 'Password reset token is invalid or has expired.' });
         return res.redirect('/');
       }
-    })
+    });
 
-}
+};
 
 exports.postResetPassword = function (req, res) {
 
@@ -256,7 +256,7 @@ exports.postResetPassword = function (req, res) {
           });
         });
     }], function(user) {
-      user.url_login = req.protocol + '://' + req.headers.host + '/login'
+      user.url_login = req.protocol + '://' + req.headers.host + '/login';
 
       Mailer.sendOne('reset-password', "Trick.JS - Your password has been changed", user, function (err, responseStatus, html, text) {
         if(err) {
@@ -264,6 +264,6 @@ exports.postResetPassword = function (req, res) {
         } else {
           return res.json({message : 'Success! Your password has been changed.', code: 200 });
         }
-      })
+      });
     });
-}
+};

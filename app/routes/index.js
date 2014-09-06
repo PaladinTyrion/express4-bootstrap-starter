@@ -2,14 +2,14 @@ var express = require('express');
 var Route = express.Router();
 var config = require('../config/config');
 var passport = require('passport');
-var lodash = require('lodash')
+var lodash = require('lodash');
 var Auth = require(config.root + '/app/middleware/authorization');
 var fs = require('fs');
 
 var userController = require(config.root + '/app/controllers/users');
 var trickController = require(config.root + '/app/controllers/tricks');
 
-var API = {}
+var API = {};
 API.tricks = require(config.root + '/app/controllers/API/tricks');
 API.Uploader = require(config.root + '/app/controllers/API/uploader');
 API.Users = require(config.root + '/app/controllers/API/users');
@@ -28,7 +28,7 @@ Route
   .get('/api/trick/tricks-user', API.tricks.listTrickByUser)
   .post('/api/trick/import', API.Uploader.import)
   .get('/api/screenshoot', API.tricks.screenShootUrl)
-  .get('/api/user/current', API.Users.get_profile)
+  .get('/api/user/current', API.Users.get_profile);
 
 // Frontend routes
 Route
@@ -58,6 +58,6 @@ Route
   })
   .get('/trick/create', Auth.requiresLogin, trickController.create)
   .get('/:username/tricks', Auth.requiresLogin, trickController.myTrick)
-  .get('/:username', userController.user_profile)
+  .get('/:username', userController.user_profile);
 
-module.exports = Route
+module.exports = Route;

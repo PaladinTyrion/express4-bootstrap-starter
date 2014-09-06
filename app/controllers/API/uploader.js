@@ -24,9 +24,9 @@ exports.import = function (req, res, next) {
 
     links.find('a').each(function(i, element){
         var newTrick = {
-            user: req.user
-          , origin_url: $(this).attr('href')
-          , title: $(this).text()
+            user: req.user,
+            origin_url: $(this).attr('href'),
+            title: $(this).text()
         };
 
         var add_date = moment.unix(_.parseInt($(this).attr('add_date')));
@@ -41,15 +41,15 @@ exports.import = function (req, res, next) {
         }
     });
 
-    var errPrint = {}
+    var errPrint = {};
     errPrint.status = 200;
     errPrint.message = 'success';
     return res.send(200, errPrint);
 
   } else {
-    var errPrint = {}
+    var errPrint = {};
     errPrint.status = 415;
-    errPrint.message = 'Unsupported Media Type'
-    return res.send(200, errPrint)
+    errPrint.message = 'Unsupported Media Type';
+    return res.send(200, errPrint);
   }
 }

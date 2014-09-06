@@ -2,11 +2,11 @@ var helpers = {
 
   // Source: http://stackoverflow.com/a/1714899/192024
   buildQuerystring: function(obj) {
-    var str = []
+    var str = [];
     for(var p in obj)
       if (obj.hasOwnProperty(p))
-        str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
-    return str.join('&')
+        str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+    return str.join('&');
   },
 
   // Source: http://phpjs.org/functions/preg_quote/
@@ -17,15 +17,15 @@ var helpers = {
 
   // Determine if a given string matches a given pattern.
   str_is: function(pattern, value) {
-    if(pattern == value) return true
-    if(pattern == '*') return true
+    if(pattern == value) return true;
+    if(pattern == '*') return true;
 
-    pattern = this.preg_quote(pattern, '/')
+    pattern = this.preg_quote(pattern, '/');
 
     // Asterisks are translated into zero-or-more regular expression wildcards
     // to make it convenient to check if the strings starts with the given
     // pattern such as "library/*", making any string check convenient.
-    var regex = new RegExp('^' + pattern.replace('\\*', '.*') + '$')
+    var regex = new RegExp('^' + pattern.replace('\\*', '.*') + '$');
 
     return !!value.match(regex);
   },
@@ -87,11 +87,12 @@ var helpers = {
     var seconds = (new Date - new Date(time)) / 1000;
     var token = '', list_choice = 1;
     if (seconds < 0) {
-    seconds = Math.abs(seconds);
-    token = 'ago';
-    list_choice = 2;
+        seconds = Math.abs(seconds);
+        token = 'ago';
+        list_choice = 2;
     }
     var i = 0, format;
+    // error or not?
     while (format = time_formats[i++])
     if (seconds < format[0]) {
       if (typeof format[2] == 'string')
@@ -101,6 +102,6 @@ var helpers = {
     }
     return time;
   }
-}
+};
 
 module.exports = helpers

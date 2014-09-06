@@ -32,7 +32,8 @@ describe('User Model', function() {
         User.findOne({
             email: 'test@gmail.com'
         }, function(err, user) {
-            if (err) return done(err);
+            if (err)
+		        return done(err);
             user.email.should.equal('test@gmail.com');
             done();
         });
@@ -42,7 +43,8 @@ describe('User Model', function() {
         User.remove({
             email: 'test@gmail.com'
         }, function(err) {
-            if (err) return done(err);
+            if (err)
+                return done(err);
             done();
         });
     });

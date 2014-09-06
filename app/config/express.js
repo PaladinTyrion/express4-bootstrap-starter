@@ -23,7 +23,7 @@ module.exports = function (app, express, passport) {
 
   var allowCrossDomain = function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Credentials', true)
+    res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
   };
@@ -42,10 +42,10 @@ module.exports = function (app, express, passport) {
   app.use(favicon(path.join(app.config.root, 'public/favicon.png')));
   app.use(allowCrossDomain);
   if (env === 'development') {
-    app.use(logger('dev'))
+    app.use(logger('dev'));
   } else {
-    app.use(logger())
-  };
+    app.use(logger());
+  }
 
   app.use(multer());
   app.use(bodyParser.json());
@@ -78,7 +78,8 @@ module.exports = function (app, express, passport) {
   var csrfExclude = ['/api/trick/import'];
   app.use(function(req, res, next) {
 
-    if (_.contains(csrfExclude, req.path)) return next();
+    if (_.contains(csrfExclude, req.path))
+	return next();
 
     csrf(req, res, next);
   });
@@ -89,9 +90,9 @@ module.exports = function (app, express, passport) {
     res.locals.NODE_ENV = env;
     res.locals.moment   = require('moment');
     if(_.isObject(req.user)) {
-      res.locals.User = req.user
+      res.locals.User = req.user;
     }
-    next()
+    next();
   });
   app.use(express.static(path.join(app.config.root, 'public')));
 
@@ -103,9 +104,9 @@ module.exports = function (app, express, passport) {
     app.use(responseTime(5));
   } else {
     app.use(compression({
-      filter: function (req, res) { return /json|text|javascript|css/.test(res.getHeader('Content-Type')) },
+      filter: function (req, res) { return /json|text|javascript|css/.test(res.getHeader('Content-Type')); },
       level: 9
-    }))
+    }));
   }
 
   app.use(function handleNotFound(req, res, next){
@@ -122,7 +123,7 @@ module.exports = function (app, express, passport) {
     }
 
     res.type('txt').send('Not found');
-  })
+  });
 
   if (env === 'development') {
 
@@ -132,39 +133,38 @@ module.exports = function (app, express, passport) {
 
     app.use(function logErrors(err, req, res, next){
       if (err.status === 404) {
-        return next(err)
+        return next(err);
       }
 
-      console.error(err.stack)
-      next(err)
-    })
+      console.error(err.stack);
+      next(err);
+    });
 
     app.use(function respondError(err, req, res, next){
-      var status, message
+      var status, message;
 
       status = err.status || 500;
       res.status(status);
 
-      message = ((err.productionMessage && err.message) ||
-        err.customProductionMessage)
+      message = ((err.productionMessage && err.message) || err.customProductionMessage);
 
       if (!message) {
         if (status === 403) {
-          message = 'Not allowed'
+          message = 'Not allowed';
         } else {
-          message = 'Oops, there was a problem!'
+          message = 'Oops, there was a problem!';
         }
       }
 
       if (req.accepts('json')) {
-        res.send({error: message})
-        return
+        res.send({error: message});
+        return;
 
       } else {
-        res.type('txt').send(message + '\n')
-        return
+        res.type('txt').send(message + '\n');
+        return;
       }
 
-    })
+    });
   }
 }
