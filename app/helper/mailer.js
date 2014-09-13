@@ -1,8 +1,8 @@
-var _              = require('lodash');
-var path           = require('path');
-var config         = require('../config/config');
-var templatesDir   = path.resolve(config.root + '/app/views/mailer');
-var nodemailer     = require('nodemailer');
+var _ = require('lodash');
+var path = require('path');
+var config = require('../config/config');
+var templatesDir = path.resolve(config.root + '/app/views/mailer');
+var nodemailer = require('nodemailer');
 var emailTemplates = require('email-templates');
 
 var transport = nodemailer.createTransport({
@@ -13,15 +13,15 @@ var transport = nodemailer.createTransport({
   }
 });
 
-exports.sendOne = function(temp, subject, obj, fn) {
-  emailTemplates(templatesDir, function(err, template) {
+exports.sendOne = function (temp, subject, obj, fn) {
+  emailTemplates(templatesDir, function (err, template) {
     if (err) {
       console.log(err);
     } else {
 
       var locals = obj;
 
-      template(temp, locals, function(err, html, text) {
+      template(temp, locals, function (err, html, text) {
         if (err) {
           console.log(err);
         } else {
@@ -33,7 +33,7 @@ exports.sendOne = function(temp, subject, obj, fn) {
             html: html,
             // generateTextFromHTML: true,
             text: text
-          }, function(err, responseStatus) {
+          }, function (err, responseStatus) {
             if (err) {
               console.log(err);
             } else {

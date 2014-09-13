@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -50,14 +49,13 @@ UserSchema.plugin(CreateUpdatedAt)
  * Virtuals
  */
 
-UserSchema
-  .virtual('password')
-  .set(function(password) {
-    this._password = password;
-    this.salt = this.makeSalt();
-    this.hashed_password = this.encryptPassword(password);
-  })
-  .get(function() { return this._password });
+UserSchema.virtual('password').set(function (password) {
+  this._password = password;
+  this.salt = this.makeSalt();
+  this.hashed_password = this.encryptPassword(password);
+}).get(function () {
+  return this._password
+});
 
 /**
  * Validations
@@ -86,7 +84,6 @@ UserSchema.path('username').validate(function (username, fn) {
   } else fn(true)
 }, 'Username already exists');
 
-
 UserSchema.path('email').validate(function (email) {
   if (this.doesNotRequireValidation()) return true
   return email.length
@@ -109,18 +106,15 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
   return hashed_password.length;
 }, 'Password cannot be blank');
 
-
 /**
  * Pre-save hook
  */
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
   if (!this.isNew) return next();
 
-  if (!validatePresenceOf(this.password)
-    && oAuthTypes.indexOf(this.provider) === -1)
-    next(new Error('Invalid password'));
-  else
+  if (!validatePresenceOf(this.password) && oAuthTypes.indexOf(this.provider) === -1)
+    next(new Error('Invalid password')); else
     next()
 });
 
@@ -172,24 +166,24 @@ UserSchema.methods = {
     }
   },
 
-  generateConfirmationToken: function(password) {
+  generateConfirmationToken: function (password) {
     if (!password) return '';
     var encrypred_confirm_code;
     try {
-      encrypred_confirm_code = crypto.createHmac('sha1',  this.salt).update(password).digest('hex');
+      encrypred_confirm_code = crypto.createHmac('sha1', this.salt).update(password).digest('hex');
       return encrypred_confirm_code;
     } catch (err) {
       return '';
     }
   },
 
-  roleAdmin: function() {
+  roleAdmin: function () {
     var admin_level = 1;
 
     return admin_level;
   },
 
-  gravatar: function(size) {
+  gravatar: function (size) {
     if (!size) size = 200;
 
     if (!this.email) {
@@ -200,12 +194,11 @@ UserSchema.methods = {
     return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
   },
 
-
   /**
    * Validation is not required if using OAuth
    */
 
-  doesNotRequireValidation: function() {
+  doesNotRequireValidation: function () {
     return ~oAuthTypes.indexOf(this.provider);
   }
 };

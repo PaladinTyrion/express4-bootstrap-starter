@@ -1,4 +1,3 @@
-
 exports.randomString = function (length) {
   var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHUJKLMNOPQRSTUVWXYZ';
   var result = '';
@@ -6,18 +5,18 @@ exports.randomString = function (length) {
   return result;
 };
 
-exports.prettyJSON = function(data) {
+exports.prettyJSON = function (data) {
   return require("prettyjson").render(data);
 };
 
-exports.responses = function(res, status, obj) {
-  var resultPrint     = {};
+exports.responses = function (res, status, obj) {
+  var resultPrint = {};
   if (status == 200) {
     resultPrint.data = obj;
   } else {
-    resultPrint     = obj;
+    resultPrint = obj;
   }
-  resultPrint.id      = require('node-uuid').v4();
-  resultPrint.status  = status;
-  return res.status(status).json(resultPrint );
+  resultPrint.id = require('node-uuid').v4();
+  resultPrint.status = status;
+  return res.status(status).json(resultPrint);
 };

@@ -1,10 +1,8 @@
-
 /**
  * Module dependencies.
  */
 
-var url = require('url'),
-    qs = require('querystring');
+var url = require('url'), qs = require('querystring');
 
 /**
  * Helpers method
@@ -14,7 +12,7 @@ var url = require('url'),
  * @api public
  */
 
-function helpers (name) {
+function helpers(name) {
   return function (req, res, next) {
     res.locals.appName = name || 'App';
     res.locals.title = name || 'App';
@@ -77,8 +75,8 @@ module.exports = helpers;
  * @api private
  */
 
-function createPagination (req) {
-  return function createPagination (pages, page) {
+function createPagination(req) {
+  return function createPagination(pages, page) {
     var params = qs.parse(url.parse(req.url).query);
     var str = '';
 
@@ -91,7 +89,7 @@ function createPagination (req) {
 
       var href = '?' + qs.stringify(params);
 
-      str += '<li class="'+clas+'"><a href="'+ href +'">'+ p +'</a></li>';
+      str += '<li class="' + clas + '"><a href="' + href + '">' + p + '</a></li>';
     }
 
     return str;
@@ -106,10 +104,10 @@ function createPagination (req) {
  * @api private
  */
 
-function formatDate (date) {
+function formatDate(date) {
   date = new Date(date);
   var monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
-  return monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
+  return monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
 }
 
 /**
@@ -120,12 +118,10 @@ function formatDate (date) {
  * @api private
  */
 
-function formatDatetime (date) {
+function formatDatetime(date) {
   date = new Date(date);
   var hour = date.getHours();
-  var minutes = date.getMinutes() < 10
-    ? '0' + date.getMinutes().toString()
-    : date.getMinutes();
+  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes().toString() : date.getMinutes();
 
   return formatDate(date) + ' ' + hour + ':' + minutes;
 }
@@ -138,6 +134,6 @@ function formatDatetime (date) {
  * @api private
  */
 
-function stripScript (str) {
+function stripScript(str) {
   return str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 }

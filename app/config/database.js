@@ -5,7 +5,7 @@ module.exports = function (app, mongoose) {
       server: {
         socketOptions: { keepAlive: 1 }
       },
-      auto_reconnect:true
+      auto_reconnect: true
     };
     mongoose.connect(app.config.database.url, options);
   };

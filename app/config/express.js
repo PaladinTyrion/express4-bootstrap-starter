@@ -1,27 +1,27 @@
-var morgan           = require('morgan');
-var path             = require('path');
-var responseTime     = require('response-time');
-var methodOverride   = require('method-override');
-var multer           = require('multer');
-var compression      = require('compression');
-var favicon          = require('serve-favicon');
-var bodyParser       = require('body-parser');
-var cookieParser     = require('cookie-parser');
-var session          = require('express-session');
-var csrf             = require('lusca').csrf();
-var MongoStore       = require('connect-mongo')({ session: session });
-var errorHandler     = require('errorhandler');
+var morgan = require('morgan');
+var path = require('path');
+var responseTime = require('response-time');
+var methodOverride = require('method-override');
+var multer = require('multer');
+var compression = require('compression');
+var favicon = require('serve-favicon');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var csrf = require('lusca').csrf();
+var MongoStore = require('connect-mongo')({ session: session });
+var errorHandler = require('errorhandler');
 var expressValidator = require('express-validator');
-var env              = process.env.NODE_ENV || 'development';
-var views_helpers    = require('../helper/views-helper');
-var pkg              = require('../../package.json');
-var flash            = require('express-flash');
-var routes           = require('../routes');
-var _                = require('lodash');
+var env = process.env.NODE_ENV || 'development';
+var views_helpers = require('../helper/views-helper');
+var pkg = require('../../package.json');
+var flash = require('express-flash');
+var routes = require('../routes');
+var _ = require('lodash');
 
 module.exports = function (app, express, passport) {
 
-  var allowCrossDomain = function(req, res, next) {
+  var allowCrossDomain = function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -45,8 +45,10 @@ module.exports = function (app, express, passport) {
     app.use(morgan('dev'));
   } else {
     app.use(morgan('combined', {
-      skip: function (req, res) { return res.statusCode < 400 },
-      stream: require('fs').createWriteStream( app.config.root + '/access.log', {flags: 'a'})
+      skip: function (req, res) {
+        return res.statusCode < 400
+      },
+      stream: require('fs').createWriteStream(app.config.root + '/access.log', {flags: 'a'})
     }));
   }
 
@@ -66,7 +68,7 @@ module.exports = function (app, express, passport) {
     secret: pkg.name,
     store: new MongoStore({
       url: app.config.database.url,
-      collection : 'sessions',
+      collection: 'sessions',
       auto_reconnect: true
     })
   }));
@@ -79,7 +81,7 @@ module.exports = function (app, express, passport) {
   app.use(flash());
 
   var csrfExclude = ['/api/trick/import'];
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     var path = req.path.split('/')[1];
     if (/api/i.test(path)) {
       return next();
@@ -91,10 +93,10 @@ module.exports = function (app, express, passport) {
 
   app.use(views_helpers(pkg.name));
   app.use(function (req, res, next) {
-    res.locals.pkg      = pkg;
+    res.locals.pkg = pkg;
     res.locals.NODE_ENV = env;
-    res.locals.moment   = require('moment');
-    if(_.isObject(req.user)) {
+    res.locals.moment = require('moment');
+    if (_.isObject(req.user)) {
       res.locals.User = req.user;
     }
     next();
@@ -109,12 +111,14 @@ module.exports = function (app, express, passport) {
     app.use(responseTime(5));
   } else {
     app.use(compression({
-      filter: function (req, res) { return /json|text|javascript|css/.test(res.getHeader('Content-Type')); },
+      filter: function (req, res) {
+        return /json|text|javascript|css/.test(res.getHeader('Content-Type'));
+      },
       level: 9
     }));
   }
 
-  app.use(function handleNotFound(req, res, next){
+  app.use(function handleNotFound(req, res, next) {
     res.status(404);
 
     if (req.accepts('html')) {
@@ -136,7 +140,7 @@ module.exports = function (app, express, passport) {
 
   } else {
 
-    app.use(function logErrors(err, req, res, next){
+    app.use(function logErrors(err, req, res, next) {
       if (err.status === 404) {
         return next(err);
       }
@@ -145,7 +149,7 @@ module.exports = function (app, express, passport) {
       next(err);
     });
 
-    app.use(function respondError(err, req, res, next){
+    app.use(function respondError(err, req, res, next) {
       var status, message;
 
       status = err.status || 500;

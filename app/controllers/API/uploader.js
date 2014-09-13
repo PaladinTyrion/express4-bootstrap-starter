@@ -16,28 +16,28 @@ exports.import = function (req, res, next) {
   var filePath = req.files.files.path;
   var mimeType = req.files.files.mimetype;
 
-  if('text/html' == mimeType) {
+  if ('text/html' == mimeType) {
     var htmlString = fs.readFileSync(filePath).toString();
     var $ = cheerio.load(htmlString);
     var links = $('p');
 
-    links.find('a').each(function(i, element){
-        var newTrick = {
-            user: req.user,
-            origin_url: $(this).attr('href'),
-            title: $(this).text()
-        };
+    links.find('a').each(function (i, element) {
+      var newTrick = {
+        user: req.user,
+        origin_url: $(this).attr('href'),
+        title: $(this).text()
+      };
 
-        var add_date = moment.unix(_.parseInt($(this).attr('add_date')));
-        newTrick.createdAt = new Date(add_date).toISOString();
-        newTrick.user = req.user._id;
+      var add_date = moment.unix(_.parseInt($(this).attr('add_date')));
+      newTrick.createdAt = new Date(add_date).toISOString();
+      newTrick.user = req.user._id;
 
-        var trick = new Trick(newTrick);
+      var trick = new Trick(newTrick);
 
-        if(Validator.isURL(newTrick.origin_url) && !Validator.isNull(newTrick.title )) {
+      if (Validator.isURL(newTrick.origin_url) && !Validator.isNull(newTrick.title)) {
 
-          trick.screenShoot(newTrick.origin_url);
-        }
+        trick.screenShoot(newTrick.origin_url);
+      }
     });
 
     var errPrint = {};

@@ -15,48 +15,48 @@ var mongooseTypes = require("mongoose-types");
 mongooseTypes.loadTypes(mongoose, "url");
 
 var Trick = new Schema({
-    title: {
-      type: String,
-      required: true,
-      index : {
-        unique: true
-      }
-    },
-    user: {
-      type : Schema.ObjectId,
-      ref : 'User'
-    },
-    tags: [
-      { type: String }
-    ],
-    description: {
-      type: String
-    },
-    origin_url: {
-      type: mongoose.SchemaTypes.Url,
-      index: {
-        unique : true
-      }
-    },
-    screenshot: {
-      type: String
-    },
-    view_counts: {
-      type: Number,
-      default: 0
-    },
-    click_counts: {
-      type: Number,
-      default: 0
-    },
-    favorite_counts: {
-      type: Number,
-      default: 0
-    },
-    is_active: {
-      type: Boolean,
-      default: true
+  title: {
+    type: String,
+    required: true,
+    index: {
+      unique: true
     }
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  tags: [
+    { type: String }
+  ],
+  description: {
+    type: String
+  },
+  origin_url: {
+    type: mongoose.SchemaTypes.Url,
+    index: {
+      unique: true
+    }
+  },
+  screenshot: {
+    type: String
+  },
+  view_counts: {
+    type: Number,
+    default: 0
+  },
+  click_counts: {
+    type: Number,
+    default: 0
+  },
+  favorite_counts: {
+    type: Number,
+    default: 0
+  },
+  is_active: {
+    type: Boolean,
+    default: true
+  }
 });
 
 Trick.plugin(slug('title'));
@@ -83,14 +83,14 @@ Trick.methods = {
       if (err) return cb(err);
 
       var opts = {
-          format:'png',
-          width: 1280,
-          height: 960
+        format: 'png',
+        width: 1280,
+        height: 960
       };
 
       var makeSalt = Math.round((new Date().valueOf() * Math.random())) + '';
 
-      var hasFileName = crypto.createHmac('sha1', makeSalt).update( url ).digest('hex');
+      var hasFileName = crypto.createHmac('sha1', makeSalt).update(url).digest('hex');
 
       self.screenshot = hasFileName + '.' + opts.format;
 
@@ -103,39 +103,39 @@ Trick.methods = {
       self.save(function (err, doc) {
 
         if (err) {
-          var errPrint     = {};
+          var errPrint = {};
 
-          if ( err.code == 11000 ) {
-            errPrint.message = 'Trick with title '+ doc.title + 'already exist';
-            errPrint.status  = 409;
+          if (err.code == 11000) {
+            errPrint.message = 'Trick with title ' + doc.title + 'already exist';
+            errPrint.status = 409;
           } else {
             errPrint = err;
-            errPrint.status  = 409;
+            errPrint.status = 409;
           }
 
-          errPrint.errors    = err.errors;
+          errPrint.errors = err.errors;
 
           return utils.responses(res, 409, errPrint);
 
         } else {
 
-          outputStream.on('open', function() {
+          outputStream.on('open', function () {
             console.log('Screenshoot the url is progress');
             // return utils.responses(res, 206, {message: 'Screenshoot the url is progress', status: 206});
           });
 
-          outputStream.on('end', function() {
+          outputStream.on('end', function () {
             console.log("EOF");
           });
 
-          outputStream.on('error', function(err) {
+          outputStream.on('error', function (err) {
             console.log("Error screenshot the url");
             // err.message = "Error screenshot the url"
             // return utils.responses(res, 500, err);
             // outputStream.end();
           });
 
-          outputStream.on('finish', function() {
+          outputStream.on('finish', function () {
             console.log("screenshot the url just finish")
           });
           return utils.responses(res, 200, doc);
@@ -155,7 +155,7 @@ Trick.statics = {
    */
 
   load: function (id, cb) {
-    this.findOne({ _id : id }).exec(cb);
+    this.findOne({ _id: id }).exec(cb);
   },
 
   /**
@@ -169,12 +169,8 @@ Trick.statics = {
   list: function (options, cb) {
     var criteria = options.criteria || {};
 
-    this.find(criteria)
-      .populate('user', 'username photo_profile')
-      .sort({'createdAt': -1}) // sort by date
-      .limit(options.perPage)
-      .skip(options.perPage * options.page)
-      .exec(cb);
+    this.find(criteria).populate('user', 'username photo_profile').sort({'createdAt': -1}) // sort by date
+    .limit(options.perPage).skip(options.perPage * options.page).exec(cb);
   }
 };
 

@@ -1,8 +1,7 @@
 // config for the express app
 // depending on `process.env.NODE_ENV`, default is `development`
 
-var path = require('path'),
-    rootPath = path.normalize(__dirname + '/../..');
+var path = require('path'), rootPath = path.normalize(__dirname + '/../..');
 
 var config = {
   // Development config
@@ -15,15 +14,15 @@ var config = {
     database: {
       url: 'mongodb://localhost/express4_bootstrap_starter'
     },
-    BaseApiURL : 'http://localhost:3001/api/',
-    root     : rootPath,
-    app      : {
-      name : 'Express4-Bootstrap-Starter'
+    BaseApiURL: 'http://localhost:3001/api/',
+    root: rootPath,
+    app: {
+      name: 'Express4-Bootstrap-Starter'
     },
     twitterAuth: true,
     twitter: {
       consumerKey: process.env.TWITTER_KEY || 'xxxxxxxxxxx',
-      consumerSecret: process.env.TWITTER_SECRET  || 'xxxxxxxxxxx',
+      consumerSecret: process.env.TWITTER_SECRET || 'xxxxxxxxxxx',
       callbackURL: '/auth/twitter/callback',
       passReqToCallback: true
     },
@@ -50,16 +49,16 @@ var config = {
     database: {
       url: 'mongodb://localhost/express4_bootstrap_starter'
     },
-    BaseApiURL : 'http://localhost:3001/api/',
-    root     : rootPath,
-    app      : {
-      name : 'Express4-Bootstrap-Starter'
+    BaseApiURL: 'http://localhost:3001/api/',
+    root: rootPath,
+    app: {
+      name: 'Express4-Bootstrap-Starter'
     },
     twitterAuth: true,
     twitter: {
       // https://apps.twitter.com/app/6070534/keys
       consumerKey: process.env.TWITTER_KEY || 'xxxxxxxxxxx',
-      consumerSecret: process.env.TWITTER_SECRET  || 'xxxxxxxxxxx',
+      consumerSecret: process.env.TWITTER_SECRET || 'xxxxxxxxxxx',
       callbackURL: '/auth/twitter/callback',
       passReqToCallback: true
     },
