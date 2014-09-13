@@ -82,7 +82,7 @@ var config = {
   test: {
     server: {
       port: 4001,
-      hostname: 'localhost',
+      hostname: 'localhost'
     },
     database: {
       url: 'mongodb://localhost/express_test'
