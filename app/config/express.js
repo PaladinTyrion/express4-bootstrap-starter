@@ -1,4 +1,4 @@
-var logger           = require('morgan');
+var morgan           = require('morgan');
 var path             = require('path');
 var responseTime     = require('response-time');
 var methodOverride   = require('method-override');
@@ -42,9 +42,12 @@ module.exports = function (app, express, passport) {
   app.use(favicon(path.join(app.config.root, 'public/favicon.png')));
   app.use(allowCrossDomain);
   if (env === 'development') {
-    app.use(logger('dev'));
+    app.use(morgan('dev'));
   } else {
-    app.use(logger());
+    app.use(morgan('combined', {
+      skip: function (req, res) { return res.statusCode < 400 },
+      stream: require('fs').createWriteStream( app.config.root + '/access.log', {flags: 'a'})
+    }));
   }
 
   app.use(multer());
@@ -77,11 +80,13 @@ module.exports = function (app, express, passport) {
 
   var csrfExclude = ['/api/trick/import'];
   app.use(function(req, res, next) {
-
-    if (_.contains(csrfExclude, req.path))
-	return next();
-
-    csrf(req, res, next);
+    var path = req.path.split('/')[1];
+    if (/api/i.test(path)) {
+      return next();
+    } else {
+      if (_.contains(csrfExclude, req.path)) return next();
+      csrf(req, res, next);
+    }
   });
 
   app.use(views_helpers(pkg.name));
@@ -167,4 +172,4 @@ module.exports = function (app, express, passport) {
 
     });
   }
-}
+};
