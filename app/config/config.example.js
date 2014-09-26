@@ -19,6 +19,9 @@ var config = {
     app: {
       name: '3D-Theatres-to-Theater-Chain'
     },
+    phantomConf: {
+      timeout: 5000
+    },
     twitterAuth: true,
     twitter: {
       consumerKey: process.env.TWITTER_KEY || 'xxxxxxxxxxx',
@@ -53,6 +56,9 @@ var config = {
     root: rootPath,
     app: {
       name: '3D-Theatres-to-Theater-Chain'
+    },
+    phantomConf: {
+      timeout: 5000
     },
     twitterAuth: true,
     twitter: {
