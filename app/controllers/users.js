@@ -10,20 +10,20 @@ var errorHelper = require(config.root + '/app/helper/errors');
 var Mailer = require(config.root + '/app/helper/mailer');
 
 var login = function (req, res) {
-  var redirectTo = req.session.returnTo ? req.session.returnTo : '/'
-  delete req.session.returnTo
+  var redirectTo = req.session.returnTo ? req.session.returnTo : '/';
+  delete req.session.returnTo;
   req.flash('success', { msg: 'Success! You are logged in.' });
   res.redirect(redirectTo)
 };
 
 exports.signin = function (req, res) {
-}
+};
 
 /**
  * Auth callback
  */
 
-exports.authCallback = login
+exports.authCallback = login;
 
 /**
  * Show login form
@@ -31,12 +31,12 @@ exports.authCallback = login
 
 exports.login = function (req, res) {
   if (req.isAuthenticated()) {
-    res.redirect('/dashboard')
+    res.redirect('/dashboard');
   } else {
     res.render('users/login', {
       title: 'Login',
       message: req.flash('error')
-    })
+    });
   }
 };
 
@@ -46,12 +46,12 @@ exports.login = function (req, res) {
 
 exports.signup = function (req, res) {
   if (req.isAuthenticated()) {
-    res.redirect('/dashboard')
+    res.redirect('/dashboard');
   } else {
     res.render('users/signup', {
       title: 'Sign up',
       user: new User()
-    })
+    });
   }
 };
 
@@ -189,7 +189,7 @@ exports.postForgotPassword = function (req, res) {
     }, function (token, user, next) {
       user.url_reset_password = req.protocol + '://' + req.headers.host + '/reset/' + token;
 
-      Mailer.sendOne('forgot-password', "Trick.JS - Password Reset", user, function (err, responseStatus, html, text) {
+      Mailer.sendOne('forgot-password', "3D Theaters - Password Reset", user, function (err, responseStatus, html, text) {
         next(err, responseStatus);
       });
     }
@@ -249,7 +249,7 @@ exports.postResetPassword = function (req, res) {
     }], function (user) {
     user.url_login = req.protocol + '://' + req.headers.host + '/login';
 
-    Mailer.sendOne('reset-password', "Trick.JS - Your password has been changed", user, function (err, responseStatus, html, text) {
+    Mailer.sendOne('reset-password', "3D Theaters - Your password has been changed", user, function (err, responseStatus, html, text) {
       if (err) {
         return errorHelper.custom(res, { msg: err, code: 500 });
       } else {

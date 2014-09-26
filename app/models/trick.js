@@ -1,7 +1,8 @@
 var phantom = require('phantom-render-stream');
 var fs = require('fs');
 var config = require('../config/config');
-var screenshot = phantom(config.phantom);
+var screenshot = phantom(config.phantomConf);
+//var screenshot = phantom();
 var utils = require(config.root + '/app/helper/utils');
 var crypto = require('crypto');
 var request = require('request');
@@ -12,6 +13,7 @@ var CreateUpdatedAt = require('mongoose-timestamp');
 var slug = require('mongoose-slug');
 var mongooseTypes = require("mongoose-types");
 
+//option: "url" or "email"
 mongooseTypes.loadTypes(mongoose, "url");
 
 var Trick = new Schema({
@@ -72,7 +74,7 @@ Trick.methods = {
    * @api private
    */
 
-  screenShoot: function (res, url) {
+  screenShoot: function (res, url, cb) {
 
     if (!url || !url.length) return this.save(cb);
 

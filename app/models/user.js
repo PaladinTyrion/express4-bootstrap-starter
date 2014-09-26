@@ -43,7 +43,7 @@ var UserSchema = new Schema({
   reset_password_expires: Date
 });
 
-UserSchema.plugin(CreateUpdatedAt)
+UserSchema.plugin(CreateUpdatedAt);
 
 /**
  * Virtuals
@@ -54,7 +54,7 @@ UserSchema.virtual('password').set(function (password) {
   this.salt = this.makeSalt();
   this.hashed_password = this.encryptPassword(password);
 }).get(function () {
-  return this._password
+  return this._password;
 });
 
 /**
@@ -62,7 +62,7 @@ UserSchema.virtual('password').set(function (password) {
  */
 
 var validatePresenceOf = function (value) {
-  return value && value.length
+  return value && value.length;
 };
 
 // the below 5 validations only apply if you are signing up traditionally
@@ -76,16 +76,16 @@ UserSchema.path('username').validate(function (username, fn) {
   var User = mongoose.model('User');
   if (this.doesNotRequireValidation()) fn(true);
 
-  // Check only when it is a new user or when email field is modified
+  // Check only when it is a new user or when username field is modified
   if (this.isNew || this.isModified('username')) {
     User.find({ username: username }).exec(function (err, users) {
       fn(!err && users.length === 0);
     });
-  } else fn(true)
+  } else fn(true);
 }, 'Username already exists');
 
 UserSchema.path('email').validate(function (email) {
-  if (this.doesNotRequireValidation()) return true
+  if (this.doesNotRequireValidation()) return true;
   return email.length
 }, 'Email cannot be blank');
 
@@ -114,8 +114,9 @@ UserSchema.pre('save', function (next) {
   if (!this.isNew) return next();
 
   if (!validatePresenceOf(this.password) && oAuthTypes.indexOf(this.provider) === -1)
-    next(new Error('Invalid password')); else
-    next()
+    next(new Error('Invalid password'));
+  else
+    next();
 });
 
 /**

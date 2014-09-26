@@ -19,7 +19,7 @@ exports.import = function (req, res, next) {
   if ('text/html' == mimeType) {
     var htmlString = fs.readFileSync(filePath).toString();
     var $ = cheerio.load(htmlString);
-    var links = $('p');
+    var links = $('body');
 
     links.find('a').each(function (i, element) {
       var newTrick = {

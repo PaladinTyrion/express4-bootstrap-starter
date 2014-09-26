@@ -3,7 +3,7 @@
 $(function() {
 
   Trick.init();
-})
+});
 
 var Trick = App.Trick = {
   init: function() {

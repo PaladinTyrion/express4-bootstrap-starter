@@ -7,21 +7,24 @@ var passport = require('passport');
 var config   = require(__dirname + '/app/config/config');
 var app      = express();
 
+var configPath = __dirname + '/app/config';
+var modelsPath = __dirname + '/app/models';
+
 app.config = config;
 
 // Database
-require('./app/config/database')(app, mongoose);
+require(configPath + '/database')(app, mongoose);
 
-var models_path = __dirname + '/app/models';
-fs.readdirSync(models_path).forEach(function (file) {
+fs.readdirSync(modelsPath).forEach(function (file) {
   if (~file.indexOf('.js'))
-    require(models_path + '/' + file);
+    require(modelsPath + '/' + file);
 });
 
-require('./app/config/passport')(app, passport);
+// Passport validation
+require(configPath + '/passport')(app, passport);
 
 // express settings
-require('./app/config/express')(app, express, passport);
+require(configPath + '/express')(app, express, passport);
 
 // create a server instance
 // passing in express app as a request event handler

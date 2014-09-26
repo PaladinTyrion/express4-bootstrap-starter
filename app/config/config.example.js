@@ -17,7 +17,7 @@ var config = {
     BaseApiURL: 'http://localhost:3001/api/',
     root: rootPath,
     app: {
-      name: 'Express4-Bootstrap-Starter'
+      name: '3D-Theatres-to-Theater-Chain'
     },
     twitterAuth: true,
     twitter: {
@@ -52,7 +52,7 @@ var config = {
     BaseApiURL: 'http://localhost:3001/api/',
     root: rootPath,
     app: {
-      name: 'Express4-Bootstrap-Starter'
+      name: '3D-Theatres-to-Theater-Chain'
     },
     twitterAuth: true,
     twitter: {

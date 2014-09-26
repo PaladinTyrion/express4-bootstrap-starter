@@ -95,7 +95,7 @@ App.User = _.extend( App.User, {
           data : {
             password: newPassword.val(),
             confirm_password : confirmNewPassword.val(),
-            '_csrf': $('input[name="_csrf"]').val(),
+            '_csrf': $('input[name="_csrf"]').val()
           },
           beforeSend: function(xhr, opts){
             btnSubmit.attr('disabled', 'disabled');

@@ -59,8 +59,8 @@ module.exports = (grunt) ->
           "public/js/plugins/nprogress.js"
           "public/js/apps/global.js"
           "public/js/apps/user.js"
-          "public/js/apps/home.js"
           "public/js/apps/trick.js"
+          "public/js/apps/home.js"
         ]
         dest: "public/js/apps.js"
 

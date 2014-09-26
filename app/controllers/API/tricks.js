@@ -11,8 +11,8 @@ var _ = require('lodash');
 exports.load = function (req, res, next) {
   Trick.load(req.params.trickId, function (err, trick) {
     req.trick = trick;
-    next()
-  })
+    next();
+  });
 };
 /**
  * Create an Tricks
@@ -21,7 +21,7 @@ exports.load = function (req, res, next) {
 exports.create = function (req, res, next) {
   var trick = new Trick(req.body);
   trick.user = req.user;
-  trick.screenShoot(res, req.body.origin_url);
+  trick.screenShoot(res, req.body.origin_url, next);
 };
 
 exports.delete = function (req, res, next) {
@@ -116,7 +116,7 @@ exports.screenShootUrl = function (req, res) {
     request(Url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
 
-        screenshot(Url).width(1280).height(800).capture(function (err, img) {
+        screenshot(Url).width(opts.width).height(opts.height).capture(function (err, img) {
 
           if (err) {
             renderDefaultImage(res);

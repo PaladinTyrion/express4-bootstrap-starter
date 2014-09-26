@@ -1,7 +1,7 @@
 {
-  "name": "Express4-Bootstrap-Starter",
+  "name": "3D-Theatres-to-Theater-Chain",
   "version": "0.1.0",
-  "description": "A simple demo app in Node.js using ExpressJS 4, Mongoose, Passport.js and Jade",
+  "description": "A demo app in Node.js using ExpressJS 4, Mongoose, Passport.js and Jade for show theater",
   "keywords": [
     "express",
     "expressJS",
@@ -22,10 +22,10 @@
     "postinstall": "grunt production",
     "test": "mocha"
   },
-  "author": "Hengkiardo <hengki.sihombing@gmail.com> (https://github.com/aredo)",
+  "author": "PaladinTyrion <paladintyrion@gmail.com> (https://github.com/PaladinTyrion)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aredo/express4-bootstrap-starter.git"
+    "url": "https://github.com/PaladinTyrion/express4-bootstrap-starter.git"
   },
   "dependencies": {
     "async": "^0.9.0",

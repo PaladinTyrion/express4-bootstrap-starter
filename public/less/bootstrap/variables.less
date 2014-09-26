@@ -13,7 +13,8 @@
 @gray-light:             lighten(#000, 60%);   // #999
 @gray-lighter:           lighten(#000, 93.5%); // #eee
 
-@brand-primary:         #e06666;
+@brand-primary:         #f46e6e;
+@brand-primary-new:     #428bca;
 @brand-success:         #5cb85c;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
@@ -145,6 +146,10 @@
 @btn-primary-bg:                 @brand-primary;
 @btn-primary-border:             darken(@btn-primary-bg, 5%);
 
+@btn-primary-new-color:          #fff;
+@btn-primary-new-bg:             @brand-primary-new;
+@btn-primary-new-border:         darken(@btn-primary-new-bg, 5%);
+
 @btn-success-color:              #fff;
 @btn-success-bg:                 @brand-success;
 @btn-success-border:             darken(@btn-success-bg, 5%);
@@ -160,6 +165,11 @@
 @btn-danger-color:               #fff;
 @btn-danger-bg:                  @brand-danger;
 @btn-danger-border:              darken(@btn-danger-bg, 5%);
+
+//constomized
+@btn-lightorange-color:          #333;
+@btn-lightorange-bg:             @lightorange;
+@btn-lightorange-border:         darken(@btn-lightorange-bg, 50%);
 
 @btn-link-disabled-color:        @gray-light;
 
@@ -537,7 +547,7 @@
 //** Default label background color
 @label-default-bg:            @gray-light;
 //** Primary label background color
-@label-primary-bg:            @brand-primary;
+@label-primary-new-bg:        @brand-primary-new;
 //** Success label background color
 @label-success-bg:            @brand-success;
 //** Info label background color
@@ -827,3 +837,12 @@
 
 //** Horizontal offset for forms and lists.
 @component-offset-horizontal: 180px;
+
+
+//== Costoms
+//
+//##
+
+//** show trick backgroud
+@orange:                   #ffa500;
+@lightorange:              #ffffb9;
