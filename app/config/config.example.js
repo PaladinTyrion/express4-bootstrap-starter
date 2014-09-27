@@ -20,7 +20,10 @@ var config = {
       name: '3D-Theatres-to-Theater-Chain'
     },
     phantomConf: {
-      timeout: 5000
+      pool: 5,
+      format: 'png',
+      width: 1280,
+      height: 800
     },
     twitterAuth: true,
     twitter: {

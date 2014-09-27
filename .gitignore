@@ -42,3 +42,7 @@ resources/
 
 #waste test
 test/snippet.js
+test/*.png
+test/*.jpeg
+test/*.jpg
+test/*.gif
