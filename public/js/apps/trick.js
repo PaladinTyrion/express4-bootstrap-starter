@@ -177,4 +177,4 @@ var Trick = App.Trick = {
   progressBarDOM : function() {
     return '<div id="progress" class="progress progress-xs progress-striped"><div data-toggle="tooltip" class="progress-bar bg-info lter"></div></div>';
   }
-}
+};

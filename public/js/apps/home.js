@@ -50,4 +50,4 @@ var Home = App.Home = {
       Notifier.show('there is something wrong to load catalogue, please try again', 'err');
     })
   }
-}
+};

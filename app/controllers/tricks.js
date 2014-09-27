@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Trick = mongoose.model('Trick');
 var tricks = require('express').Router();
 var config = require('../config/config');
-//var request = require('request');
+var request = require('request');
 var _ = require('lodash');
 
 /**
@@ -13,7 +13,7 @@ exports.create = function (req, res) {
   res.render('tricks/new', {
     title: 'New Theater',
     trick: new Trick({})
-  })
+  });
 };
 
 exports.myTrick = function (req, res) {

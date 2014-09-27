@@ -1,8 +1,8 @@
 var phantom = require('phantom-render-stream');
 var fs = require('fs');
 var config = require('../config/config');
-var screenshot = phantom(config.phantomConf);
 //var screenshot = phantom();
+var screenshot = phantom(config.phantomConf);
 var utils = require(config.root + '/app/helper/utils');
 var crypto = require('crypto');
 var request = require('request');
@@ -108,7 +108,7 @@ Trick.methods = {
           var errPrint = {};
 
           if (err.code == 11000) {
-            errPrint.message = 'Trick with title ' + doc.title + 'already exist';
+            errPrint.message = 'Trick with title ' + self.title + ' already exist';
             errPrint.status = 409;
           } else {
             errPrint = err;
