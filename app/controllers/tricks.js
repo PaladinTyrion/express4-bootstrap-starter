@@ -24,7 +24,17 @@ exports.myTrick = function (req, res) {
     res.redirect('/' + username_params);
   }
 
+  var page = req.param('page') || 0;
   res.render('tricks/tricks-user', {
-    title: 'My Theater'
+    title: 'My Theater',
+    page: page
+  });
+};
+
+exports.homeTrick = function (req, res) {
+  var page = req.param('page') || 0;
+  res.render('index', {
+    title: 'HomePage',
+    page: page
   });
 };

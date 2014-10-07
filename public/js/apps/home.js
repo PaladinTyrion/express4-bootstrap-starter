@@ -31,22 +31,48 @@ var Home = App.Home = {
     }
   },
   getAllTrick: function(el){
-    $.ajax({
-      url: App.API_BaseUrl + '/trick',
-      method: 'GET',
-      cache: false,
-      dataType: "JSON",
-      beforeSend: function( xhr ) {
-      }
-    })
-    .done(function(res) {
-      var list_tricks = res.data.tricks;
+    var blockEl = $(el);
+    var page = blockEl.data('page');
+    if(page){
+      $.ajax({
+        url: App.API_BaseUrl + '/trick',
+        method: 'GET',
+        cache: false,
+        data: {
+          page: page
+        },
+        dataType: "JSON",
+        beforeSend: function( xhr ) {
+        }
+      })
+      .done(function(res) {
+        var list_tricks = res.data.tricks;
 
-      App.Trick.renderTrick(el, list_tricks);
+        App.Trick.renderTrick(el, list_tricks);
 
-    })
-    .fail (function(jqXHR, textStatus) {
-      Notifier.show('there is something wrong to load catalogue, please try again', 'err');
-    });
+      })
+      .fail (function(jqXHR, textStatus) {
+        Notifier.show('there is something wrong to load catalogue, please try again', 'err');
+      });
+    }else{
+      $.ajax({
+        url: App.API_BaseUrl + '/trick',
+        method: 'GET',
+        cache: false,
+        dataType: "JSON",
+        beforeSend: function( xhr ) {
+        }
+      })
+      .done(function(res) {
+        var list_tricks = res.data.tricks;
+
+        App.Trick.renderTrick(el, list_tricks);
+
+      })
+      .fail (function(jqXHR, textStatus) {
+        Notifier.show('there is something wrong to load catalogue, please try again', 'err');
+      });
+    }
+
   }
 };

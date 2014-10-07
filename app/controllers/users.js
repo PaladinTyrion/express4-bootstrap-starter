@@ -117,6 +117,7 @@ exports.show = function (req, res, next) {
 
 exports.user_profile = function (req, res, next) {
   var username = req.params.username;
+  var userpage = req.params.page || 0;
 
   async.waterfall([
     function (callback) {
@@ -151,7 +152,8 @@ exports.user_profile = function (req, res, next) {
 
       res.render('users/show', {
         title: user.name,
-        user: user
+        user: user,
+        page: userpage
       });
     }
 

@@ -49,13 +49,15 @@ Route
   .get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function (req, res) {
     res.redirect(req.session.returnTo || '/');
   })
+  .get('/hall', trickController.homeTrick)
+  .get('/hall/:page', trickController.homeTrick)
   .get('/trick/create', Auth.requiresLogin, trickController.create)
   .get('/:username/tricks', Auth.requiresLogin, trickController.myTrick)
+  .get('/:username/tricks/:page', Auth.requiresLogin, trickController.myTrick)
   .get('/:username', userController.user_profile)
-  .get('/', function (req, res) {
-    res.render('index', {
-      title: 'Express 4'
-    });
+  .get('/:username/:page', userController.user_profile)
+  .get('/', function(req, res){
+    res.redirect('/hall');
   })
   .param('trickId', API.tricks.load);
 

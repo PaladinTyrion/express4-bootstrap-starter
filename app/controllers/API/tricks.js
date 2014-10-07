@@ -47,8 +47,9 @@ exports.delete = function (req, res, next) {
 
 exports.getAll = function (req, res, next) {
 
-  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 14;
+  var page = (req.query.page > 0 ? req.query.page : 1) - 1 || 0;
+//  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var perPage = 15;
   var options = {
     perPage: perPage,
     page: page
@@ -74,7 +75,9 @@ exports.listTrickByUser = function (req, res, next) {
 
   var user_id = req.query.user_id;
 
-  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var page = (req.query.page > 0 ? req.query.page : 1) - 1 || 0;
+
+//  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
   var perPage = 15;
   var options = {
     perPage: perPage,

@@ -32,12 +32,14 @@ var Trick = App.Trick = {
 
     var user_id = block.data('id');
     var username = block.data('username');
+    var page = block.data('page');
     $.ajax({
       url: App.API_BaseUrl + '/trick/tricks-user',
       method: 'GET',
       cache: false,
       data: {
-        user_id: user_id
+        user_id: user_id,
+        page: page
       },
       dataType: "json",
       beforeSend: function( xhr ) {
