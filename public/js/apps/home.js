@@ -13,7 +13,6 @@ var Home = App.Home = {
   init: function() {
     var This = Home;
     var Trick = App.Trick;
-
     This.renderAllTricks();
   },
   renderAllTricks: function() {
@@ -48,6 +47,6 @@ var Home = App.Home = {
     })
     .fail (function(jqXHR, textStatus) {
       Notifier.show('there is something wrong to load catalogue, please try again', 'err');
-    })
+    });
   }
 };

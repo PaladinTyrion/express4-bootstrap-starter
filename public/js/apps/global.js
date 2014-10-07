@@ -35,7 +35,7 @@ if(window.isLogin) {
       }
     });
   }
-};
+}
 
 NProgress.configure({ ease: 'ease', speed: 500, trickle: false });
 NProgress.start();

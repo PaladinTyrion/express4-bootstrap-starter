@@ -11,7 +11,7 @@ var Mailer = require(config.root + '/app/helper/mailer');
 
 var login = function (req, res) {
   var redirectTo = req.session.returnTo ? req.session.returnTo : '/';
-  delete req.session.returnTo;
+  delete req.session.returnTod;
   req.flash('success', { msg: 'Success! You are logged in.' });
   res.redirect(redirectTo)
 };
