@@ -70,6 +70,12 @@ module.exports = (grunt) ->
         ]
         dest: "public/js/plugins.js"
 
+      paginator:
+        src: [
+          "public/js/paginator/*"
+        ]
+        dest: "public/js/paginator.js"
+
     jshint:
       options:
         jshintrc: "js/bootstrap/.jshintrc"
@@ -89,6 +95,7 @@ module.exports = (grunt) ->
         src: [
           "<%= concat.bootstrap.dest %>"
           "public/js/plugins.js"
+          "public/js/bootstrap-paginator.js"
           "public/js/apps.js"
         ]
         dest: "public/assets/js/apps.min.js"

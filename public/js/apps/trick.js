@@ -15,6 +15,7 @@ var Trick = App.Trick = {
   },
   tricksByUser: function() {
     var blockUserTrick = '.block-tricks-user';
+    var trickPage = '.pagination';
 
     if($(blockUserTrick).length > 0) {
       $.Mustache
@@ -23,11 +24,11 @@ var Trick = App.Trick = {
           console.log('Failed to load templates from <code>' + Trick.mustacheTemplateDir + '</code>');
         })
         .done(function () {
-          Trick.getTrickByUser(blockUserTrick);
+          Trick.getTrickByUser(blockUserTrick, trickPage);
         });
     }
   },
-  getTrickByUser: function(el) {
+  getTrickByUser: function(el, elp) {
     var block = $(el);
 
     var user_id = block.data('id');
@@ -49,8 +50,9 @@ var Trick = App.Trick = {
       var list_tricks = res.data.tricks;
       var tricks_count = res.data.tricks_count;
 
-      Trick.renderTrick(el, list_tricks);
-
+      App.Paginator.currentPage = page > 0 ? page : 1;
+      var pageCount = Math.ceil(parseInt(tricks_count)/15);
+      App.Paginator.pageCount = pageCount;
 
       if($('.profile-card').length > 0) {
         $('.profile-card').find('.tricks-count').html(tricks_count);
@@ -59,6 +61,9 @@ var Trick = App.Trick = {
       if(_.size(list_tricks) > 0) {
         $.jStorage.set('tricks-by-'+ username, res, {TTL : 600000}); // set localStorange to 10 Minutes
       }
+
+      Trick.renderTrick(el, list_tricks);
+      Trick.renderPageBar(elp, App.Paginator.currentPage, App.Paginator.pageCount);
     })
     .fail (function(jqXHR, textStatus) {
       console.error(jqXHR.responseJSON.message)
@@ -96,13 +101,24 @@ var Trick = App.Trick = {
     });
 
   },
+  renderPageBar: function(elp, currentPage, pageCount) {
+
+    var paginatorEl = $(elp);
+
+    var options = {
+      currentPage: currentPage,
+      totalPages: pageCount,
+      numberOfPages: 5
+    };
+    paginatorEl.bootstrapPaginator(options);
+
+  },
   createNewTrick: function() {
 
     var formNewTrick = $('form.new-trick');
 
     formNewTrick.submit(function(e) {
       e.preventDefault();
-
     })
     .validate({
       rules: {
@@ -145,7 +161,7 @@ var Trick = App.Trick = {
           // }, 5000);
         })
         .always(function(res) {
-          console.log(res)
+          console.log(res);
         });
       }
     });

@@ -8,6 +8,7 @@ if (typeof App != "object") {
 App.BaseUrl = location.protocol + '//' + location.host;
 App.API_BaseUrl = location.protocol + '//' + location.host + '/api';
 App.User = {};
+App.Paginator = {};
 App.Mustache = $.Mustache;
 App.Mustache.directory = App.BaseUrl + '/mustache';
 

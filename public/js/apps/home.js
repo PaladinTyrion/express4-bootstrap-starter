@@ -26,53 +26,38 @@ var Home = App.Home = {
           console.log('Failed to load templates from <code>' + Trick.mustacheTemplateDir + '</code>');
         })
         .done(function () {
-          Home.getAllTrick('.block-tricks');
+          Home.getAllTrick('.block-tricks', '.pagination');
         });
     }
   },
-  getAllTrick: function(el){
+  getAllTrick: function(el, elp){
     var blockEl = $(el);
-    var page = blockEl.data('page');
-    if(page){
-      $.ajax({
-        url: App.API_BaseUrl + '/trick',
-        method: 'GET',
-        cache: false,
-        data: {
-          page: page
-        },
-        dataType: "JSON",
-        beforeSend: function( xhr ) {
-        }
-      })
-      .done(function(res) {
-        var list_tricks = res.data.tricks;
+    var paginatorEl = $(elp);
+    var page = blockEl.data('page') || 0;
+    $.ajax({
+      url: App.API_BaseUrl + '/trick',
+      method: 'GET',
+      cache: false,
+      data: {
+        page: page
+      },
+      dataType: "JSON",
+      beforeSend: function( xhr ) {
+      }
+    })
+    .done(function(res) {
 
-        App.Trick.renderTrick(el, list_tricks);
+      var currentPage = page > 0 ? page : 1;
+      var list_tricks = res.data.tricks;
+      var tricks_count = res.data.tricks_count;
+      var pageCount = Math.ceil(parseInt(tricks_count)/15);
 
-      })
-      .fail (function(jqXHR, textStatus) {
-        Notifier.show('there is something wrong to load catalogue, please try again', 'err');
-      });
-    }else{
-      $.ajax({
-        url: App.API_BaseUrl + '/trick',
-        method: 'GET',
-        cache: false,
-        dataType: "JSON",
-        beforeSend: function( xhr ) {
-        }
-      })
-      .done(function(res) {
-        var list_tricks = res.data.tricks;
+      App.Trick.renderTrick(el, list_tricks);
+      App.Trick.renderPageBar(elp, currentPage, pageCount);
 
-        App.Trick.renderTrick(el, list_tricks);
-
-      })
-      .fail (function(jqXHR, textStatus) {
-        Notifier.show('there is something wrong to load catalogue, please try again', 'err');
-      });
-    }
-
+    })
+    .fail (function(jqXHR, textStatus) {
+      Notifier.show('there is something wrong to load catalogue, please try again', 'err');
+    });
   }
 };
