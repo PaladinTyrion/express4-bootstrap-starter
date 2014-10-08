@@ -52,8 +52,6 @@ var Trick = App.Trick = {
       var tricks_count = res.data.tricks_count;
       var origin_url = block.data('url');
 
-//      console.log('我是万恶的分割线：' + origin_url);
-
       App.Paginator.currentPage = page > 0 ? page : 1;
       var pageCount = Math.ceil(parseInt(tricks_count)/15);
       App.Paginator.pageCount = pageCount;
@@ -66,14 +64,14 @@ var Trick = App.Trick = {
         $.jStorage.set('tricks-by-'+ username, res, {TTL : 600000}); // set localStorange to 10 Minutes
       }
 
-      Trick.renderTrick(el, list_tricks);
+      Trick.renderTrick(el, list_tricks, origin_url);
       Trick.renderPageBar(elp, App.Paginator.currentPage, App.Paginator.pageCount, origin_url);
     })
     .fail (function(jqXHR, textStatus) {
       console.error(jqXHR.responseJSON.message)
     });
   },
-  renderTrick: function(el, list_tricks) {
+  renderTrick: function(el, list_tricks, origin_url) {
 
     var render = render || $(el);
 
@@ -93,8 +91,9 @@ var Trick = App.Trick = {
         trick.tags = trick.tags.split(/\s*,\s*/);
       }
       delete trick.user.email;
+      trick.preUrl = origin_url;
 
-      render.append($.Mustache.render('trickItem', trick ));
+      render.append($.Mustache.render('trickItem', trick));
     });
 
     var container = document.querySelector(el);
@@ -138,7 +137,6 @@ var Trick = App.Trick = {
           pagehtml+= '<li><a href="' + origin_url + (options.currentPage+1) + '">下一页</a></li>';
         }
       }
-//      console.log(options.currentPage+ '/' + options.totalPages + '万恶的分割线' + pagehtml);
       $(".pagination").html(pagehtml);
     }
   },

@@ -85,6 +85,8 @@ module.exports = function (app, express, passport) {
     var path = req.path.split('/')[1];
     if (/api/i.test(path)) {
       return next();
+    } else if (/delete/i.test(path)) {
+      return next();
     } else {
       if (_.contains(csrfExclude, req.path)) return next();
       csrf(req, res, next);

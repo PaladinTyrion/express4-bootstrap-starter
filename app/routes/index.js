@@ -52,6 +52,7 @@ Route
   .get('/hall', trickController.homeTrick)
   .get('/hall/:page', trickController.homeTrick)
   .get('/trick/create', Auth.requiresLogin, trickController.create)
+  .post('/delete/trick/:trickId', Auth.requiresLogin, trickController.deleteTrick)
   .get('/:username/tricks', Auth.requiresLogin, trickController.myTrick)
   .get('/:username/tricks/:page', Auth.requiresLogin, trickController.myTrick)
   .get('/:username', userController.user_profile)

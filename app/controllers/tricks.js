@@ -40,3 +40,10 @@ exports.homeTrick = function (req, res) {
     origin_url: '/hall/'
   });
 };
+
+exports.deleteTrick = function(req, res) {
+  var trickD = req.trick;
+  var itemId = req.param('itemId');
+  var redirectUrl = req.param('redirectUrl');
+  res.redirect(redirectUrl);
+};

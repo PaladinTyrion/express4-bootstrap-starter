@@ -21,10 +21,17 @@
     <div class="hover-mask"></div>
   </div>
   <div class="trick-meta">
-    <div class="panel-body b-t">
-      <h4 class="pad-none m-n text-md">
+    <div class="panel-body panel-costom b-t">
+      <h4 class="pad-none text-md">
         <a href="{{origin_url}}" target="_blank">{{title}}</a>
-        </h4>
+      </h4>
+      {{#is_mine}}
+      <form method="post" action="/delete/trick/{{_id}}" name="{{_id}}">
+        <input type="hidden" name="itemId" value="{{_id}}">
+        <input type="hidden" name="redirectUrl" value="{{preUrl}}">
+        <input class="input-right" type="submit" value="delete">
+      </form>
+      {{/is_mine}}
     </div>
   </div>
   <div class="trick-credit">

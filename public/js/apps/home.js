@@ -58,7 +58,7 @@ var Home = App.Home = {
       var tricks_count = res.data.tricks_count;
       var pageCount = Math.ceil(parseInt(tricks_count)/15);
 
-      App.Trick.renderTrick(el, list_tricks);
+      App.Trick.renderTrick(el, list_tricks, origin_url);
       App.Trick.renderPageBar(elp, currentPage, pageCount, origin_url);
 
     })
