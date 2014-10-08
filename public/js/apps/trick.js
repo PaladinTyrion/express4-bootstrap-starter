@@ -15,7 +15,8 @@ var Trick = App.Trick = {
   },
   tricksByUser: function() {
     var blockUserTrick = '.block-tricks-user';
-    var trickPage = '.pagination';
+    var trickPage = '#pagination';
+    var ulPageBar = '.pagination';
 
     if($(blockUserTrick).length > 0) {
       $.Mustache
@@ -24,7 +25,7 @@ var Trick = App.Trick = {
           console.log('Failed to load templates from <code>' + Trick.mustacheTemplateDir + '</code>');
         })
         .done(function () {
-          Trick.getTrickByUser(blockUserTrick, trickPage);
+          Trick.getTrickByUser(blockUserTrick, ulPageBar);
         });
     }
   },
@@ -49,6 +50,9 @@ var Trick = App.Trick = {
     .done(function(res) {
       var list_tricks = res.data.tricks;
       var tricks_count = res.data.tricks_count;
+      var origin_url = block.data('url');
+
+//      console.log('我是万恶的分割线：' + origin_url);
 
       App.Paginator.currentPage = page > 0 ? page : 1;
       var pageCount = Math.ceil(parseInt(tricks_count)/15);
@@ -63,7 +67,7 @@ var Trick = App.Trick = {
       }
 
       Trick.renderTrick(el, list_tricks);
-      Trick.renderPageBar(elp, App.Paginator.currentPage, App.Paginator.pageCount);
+      Trick.renderPageBar(elp, App.Paginator.currentPage, App.Paginator.pageCount, origin_url);
     })
     .fail (function(jqXHR, textStatus) {
       console.error(jqXHR.responseJSON.message)
@@ -101,17 +105,42 @@ var Trick = App.Trick = {
     });
 
   },
-  renderPageBar: function(elp, currentPage, pageCount) {
+  renderPageBar: function(elp, currentPage, pageCount, origin_url) {
 
     var paginatorEl = $(elp);
+    if(paginatorEl){
+      var options = {
+        currentPage: currentPage,
+        totalPages: pageCount,
+        numberOfPages: 5
+      };
+      var pagehtml="";
+      //just only one page
+      if(options.totalPages <= 1) {
+        pagehtml="";
+      }
+      //more than one page
+      if(options.totalPages > 1) {
+        if(options.currentPage > 1) {
+          pagehtml+= '<li><a href="' + origin_url + (options.currentPage-1) + '">上一页</a></li>';
+        }
+        for(var i=0;i<options.totalPages;i++){
+          if(i>=(options.currentPage-3) && i<(options.currentPage+3)){
+            if(i==options.currentPage-1){
+              pagehtml+= '<li class="active"><a href="' + origin_url + (i+1) +'">' + (i+1) + '</a></li>';
+            }else{
+              pagehtml+= '<li><a href="' + origin_url + (i+1) + '">' + (i+1) + '</a></li>';
+            }
 
-    var options = {
-      currentPage: currentPage,
-      totalPages: pageCount,
-      numberOfPages: 5
-    };
-    paginatorEl.bootstrapPaginator(options);
-
+          }
+        }
+        if(options.currentPage<options.totalPages){
+          pagehtml+= '<li><a href="' + origin_url + (options.currentPage+1) + '">下一页</a></li>';
+        }
+      }
+//      console.log(options.currentPage+ '/' + options.totalPages + '万恶的分割线' + pagehtml);
+      $(".pagination").html(pagehtml);
+    }
   },
   createNewTrick: function() {
 

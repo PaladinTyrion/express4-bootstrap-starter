@@ -153,7 +153,8 @@ exports.user_profile = function (req, res, next) {
       res.render('users/show', {
         title: user.name,
         user: user,
-        page: userpage
+        page: userpage,
+        origin_url: '/' + username + '/'
       });
     }
 

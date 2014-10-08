@@ -70,11 +70,6 @@ module.exports = (grunt) ->
         ]
         dest: "public/js/plugins.js"
 
-      paginator:
-        src: [
-          "public/js/paginator/*"
-        ]
-        dest: "public/js/paginator.js"
 
     jshint:
       options:
@@ -129,6 +124,7 @@ module.exports = (grunt) ->
           "public/assets/css/apps.min.css": [
             "public/css/bootstrap.css"
             "public/css/apps.css"
+#            "public/css/bootstrapv3.css"
           ]
 
     copy:

@@ -18,6 +18,9 @@ var Home = App.Home = {
   renderAllTricks: function() {
 
     var blockHome = $('#home-page');
+    var blockTrick = '.block-tricks';
+    var trickPage = '#pagination';
+    var ulPageBar = '.pagination';
 
     if(blockHome.length > 0) {
       $.Mustache
@@ -26,14 +29,15 @@ var Home = App.Home = {
           console.log('Failed to load templates from <code>' + Trick.mustacheTemplateDir + '</code>');
         })
         .done(function () {
-          Home.getAllTrick('.block-tricks', '.pagination');
+          Home.getAllTrick(blockTrick, ulPageBar);
         });
     }
   },
   getAllTrick: function(el, elp){
     var blockEl = $(el);
-    var paginatorEl = $(elp);
+
     var page = blockEl.data('page') || 0;
+
     $.ajax({
       url: App.API_BaseUrl + '/trick',
       method: 'GET',
@@ -47,13 +51,15 @@ var Home = App.Home = {
     })
     .done(function(res) {
 
+      var origin_url = blockEl.data('url');
+
       var currentPage = page > 0 ? page : 1;
       var list_tricks = res.data.tricks;
       var tricks_count = res.data.tricks_count;
       var pageCount = Math.ceil(parseInt(tricks_count)/15);
 
       App.Trick.renderTrick(el, list_tricks);
-      App.Trick.renderPageBar(elp, currentPage, pageCount);
+      App.Trick.renderPageBar(elp, currentPage, pageCount, origin_url);
 
     })
     .fail (function(jqXHR, textStatus) {
