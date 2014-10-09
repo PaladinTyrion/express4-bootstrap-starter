@@ -20,7 +20,7 @@ var config = {
       name: '3D-Theatres-to-Theater-Chain'
     },
     phantomConf: {
-      pool: 5,
+      pool: 8,
       format: 'png',
       width: 1280,
       height: 800

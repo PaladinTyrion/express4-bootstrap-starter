@@ -27,7 +27,7 @@
       </h4>
       {{#is_mine}}
       <form method="post" action="/delete/trick/{{_id}}" name="{{_id}}">
-        <input type="hidden" name="itemId" value="{{_id}}">
+        <input type="hidden" name="itemMogoId" value="{{_id}}">
         <input type="hidden" name="redirectUrl" value="{{preUrl}}">
         <input class="input-right" type="submit" value="delete">
       </form>

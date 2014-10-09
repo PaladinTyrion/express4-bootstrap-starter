@@ -145,3 +145,19 @@ var renderDefaultImage = function (res) {
     res.send(new Buffer(data));
   });
 };
+
+//costomized
+exports.deleteOneTrick = function (trick, next) {
+
+  if(!trick) return next();
+
+  trick.is_active = false;
+  trick.updatedAt = new Date().toISOString();
+
+  trick.save(function (err, doc) {
+
+    if (err) return next(err);
+
+    return next();
+  });
+};

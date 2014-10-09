@@ -4,6 +4,7 @@ var tricks = require('express').Router();
 var config = require('../config/config');
 var request = require('request');
 var _ = require('lodash');
+var APITrick = require('./API/tricks');
 
 /**
  * New Trick
@@ -42,8 +43,14 @@ exports.homeTrick = function (req, res) {
 };
 
 exports.deleteTrick = function(req, res) {
-  var trickD = req.trick;
-  var itemId = req.param('itemId');
+  var itemId = req.param('itemMogoId');
   var redirectUrl = req.param('redirectUrl');
-  res.redirect(redirectUrl);
+  var trickTod = res.trick = req.trick;
+  APITrick.deleteOneTrick(trickTod, function(err) {
+    if(err) {
+      res.render('500', {message: err.message, error: err});
+    } else {
+      res.redirect(redirectUrl);
+    }
+  });
 };
