@@ -90,6 +90,11 @@ var Trick = App.Trick = {
       if(!_.isArray(trick.tags)) {
         trick.tags = trick.tags.split(/\s*,\s*/);
       }
+
+      if(trick.title === 'unity3d-web') {
+        trick.origin_url = '/unity3d';
+      }
+
       delete trick.user.email;
       trick.preUrl = origin_url;
 

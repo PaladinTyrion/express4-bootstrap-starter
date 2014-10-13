@@ -21,12 +21,24 @@ head(prefix="og: http://ogp.me/ns# express4-bootstrap-starter: http://ogp.me/ns/
 
   script(src='/js/libs/modernizr.custom.js')
 
+  if isUnity
+    script.
+      var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js"
+      if (document.location.protocol == 'https:')
+        unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-")
+      document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>')
+
   if NODE_ENV == 'development'
     link( rel="stylesheet" href="/css/bootstrap.css" type="text/css")
     link( rel="stylesheet" href="/css/apps.css" type="text/css")
+    script.
+      window.jQuery || document.write('<script src="/js/libs/jquery-2.1.0.min.js"><\/script>')
 
   if NODE_ENV == 'production'
     link( rel="stylesheet" href="/assets/css/apps.min.css" type="text/css")
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js')
+    script.
+      window.jQuery || document.write('<script src="/js/libs/jquery-2.1.0.min.js"><\/script>')
 
   //[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

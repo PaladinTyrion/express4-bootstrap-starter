@@ -56,7 +56,6 @@ module.exports = (grunt) ->
 
       apps:
         src: [
-          "public/js/plugins/nprogress.js"
           "public/js/apps/global.js"
           "public/js/apps/user.js"
           "public/js/apps/trick.js"
@@ -69,6 +68,12 @@ module.exports = (grunt) ->
           "public/js/plugins/*"
         ]
         dest: "public/js/plugins.js"
+
+      unity:
+        src: [
+          "public/js/apps/unity3d.js"
+        ]
+        dest: "public/js/unity3d.js"
 
 
     jshint:
@@ -90,10 +95,14 @@ module.exports = (grunt) ->
         src: [
           "<%= concat.bootstrap.dest %>"
           "public/js/plugins.js"
-          "public/js/bootstrap-paginator.js"
           "public/js/apps.js"
         ]
         dest: "public/assets/js/apps.min.js"
+      unity3d:
+        src: [
+          "public/js/unity3d.js"
+        ]
+        dest: "public/assets/js/unity3d.min.js"
 
     less:
       compileCore:
@@ -124,7 +133,6 @@ module.exports = (grunt) ->
           "public/assets/css/apps.min.css": [
             "public/css/bootstrap.css"
             "public/css/apps.css"
-#            "public/css/bootstrapv3.css"
           ]
 
     copy:

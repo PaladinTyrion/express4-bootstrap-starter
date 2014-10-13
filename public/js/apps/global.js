@@ -12,7 +12,6 @@ App.Paginator = {};
 App.Mustache = $.Mustache;
 App.Mustache.directory = App.BaseUrl + '/mustache';
 
-
 if(window.isLogin) {
 
   var currentUser = $.jStorage.get('current_user');

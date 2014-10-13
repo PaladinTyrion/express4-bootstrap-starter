@@ -31,6 +31,7 @@ public/css/*
 public/js/bootstrap.js
 public/js/apps.js
 public/js/paginator.js
+public/js/unity3d.js
 rsync_exclude.txt
 deploy
 public/assets/

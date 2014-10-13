@@ -54,3 +54,11 @@ exports.deleteTrick = function(req, res) {
     }
   });
 };
+
+exports.unityrender = function(req, res) {
+
+  res.render('unity3d/unity3d', {
+    title: 'CUC Theater',
+    isUnity: true
+  });
+};
