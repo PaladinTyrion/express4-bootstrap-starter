@@ -24,7 +24,7 @@
   "author": "PaladinTyrion <paladintyrion@gmail.com> (https://github.com/PaladinTyrion)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PaladinTyrion/express4-bootstrap-starter.git"
+    "url": "https://github.com/PaladinTyrion/theater-web.git"
   },
   "dependencies": {
     "async": "^0.9.0",
