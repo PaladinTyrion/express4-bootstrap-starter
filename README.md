@@ -32,12 +32,12 @@ After installing  Node.js and MongoDB server has running, then its time to runni
 **NOTE:**
 Need installing grunt-cli -g. It refers to http://blog.csdn.net/lihongxun945/article/details/8895208 and http://www.gruntjs.org/.
 
- ```
+```
   $ npm install -g grunt-cli
 ```
 
 ```
-  $ git clone git@github.com:aredo/express4-bootstrap-starter.git
+  $ git clone https://github.com/PaladinTyrion/theater-web.git
   $ cd express4-bootstrap-starter
   $ npm install
   $ cp app/config/config.example.js app/config/config.js
@@ -52,7 +52,14 @@ Then visit [http://localhost:3001/](http://localhost:3001/)
 - [Passport](http://passportjs.org/) - Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.
 - [Mongoose](mongoosejs.com/docs/api.html) - Elegant [MongoDB](http://www.mongodb.org/) object modeling for **Node.JS**. Mongoose provides a straight-forward, schema-based solution to modeling your application data and includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
 - [LESS.JS](http://lesscss.org/) - Less is a CSS pre-processor, meaning that it extends the CSS language, adding features that allow variables, mixins, functions and many other techniques that allow you to make CSS that is more maintainable, themable and extendable.
+ 
 
+### Routes && Other Directions
+- Hostpage redirects to /hall/.
+- Only item title contains "unity3d" can route to theater show.
+- The Path public/screenshot/ must mkdir by user.
+- None web based on **HIGH-RENDER** Technology such as **WEBGL** or **Walled** can be screenshoted.
+- ALL *.unity3d puts into public/unity3d/.
 
 ### Directory structure
 
@@ -72,6 +79,9 @@ Then visit [http://localhost:3001/](http://localhost:3001/)
   |__less
   |__fonts
   |__img
+  |__mustache (Template for items)
+  |__unity3d (.unity3d && std.xml)
+  |__screenhot (user mkdir)
   favicon.ico
 -Grunfile.coffee
 ```
@@ -79,4 +89,4 @@ Then visit [http://localhost:3001/](http://localhost:3001/)
 
 # Troubleshooting
 
-During install some of you may encounter some issues feel free to contact me [@hengkiardo](http://twitter.com/hengkiardo) or submit [issue](https://github.com/aredo/express4-bootstrap-starter/issues). via the repository issue tracker or the links provided below. I am also available on twitter [@hengkiardo](http://twitter.com/hengkiardo).
+During install some of you may encounter some issues feel free to contact me [@paladintyrion](http://weibo.com/u/1085583241) or submit [issue](https://github.com/PaladinTyrion/theater-web/issues). via the repository issue tracker or the links provided below. I am also available on twitter [@paladintyrion](http://weibo.com/u/1085583241).

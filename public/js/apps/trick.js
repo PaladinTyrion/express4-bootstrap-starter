@@ -91,7 +91,7 @@ var Trick = App.Trick = {
         trick.tags = trick.tags.split(/\s*,\s*/);
       }
 
-      if(trick.title === 'unity3d-web') {
+      if(~trick.title.indexOf('unity3d')) {
         trick.origin_url = '/unity3d';
       }
 
