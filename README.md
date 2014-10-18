@@ -32,6 +32,10 @@ After installing  Node.js and MongoDB server has running, then its time to runni
 **NOTE:**
 Need installing grunt-cli -g. It refers to http://blog.csdn.net/lihongxun945/article/details/8895208 and http://www.gruntjs.org/.
 
+**NOTE:**
+Need installing plantomjs globally, because url-to-screenshot@0.4.1 is dependent on plantomjs.
+You can install plantomjs via `$ brew install plantomjs` on OSX.
+
 ```
   $ npm install -g grunt-cli
 ```
