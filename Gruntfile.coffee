@@ -150,6 +150,12 @@ module.exports = (grunt) ->
             src: ["**"]
             dest: "public/assets/fonts"
           }
+          {
+            expand: true
+            cwd: "public/unity3d/"
+            src: ["**"]
+            dest: "public/assets/unity3d"
+          }
         ]
 
     nodemon:
