@@ -170,7 +170,6 @@ module.exports = function (app, express, passport) {
       if (req.accepts('json')) {
         res.send({error: message});
         return;
-
       } else {
         res.type('txt').send(message + '\n');
         return;

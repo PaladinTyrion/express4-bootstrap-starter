@@ -58,9 +58,7 @@ Route
   .get('/:username/tricks/:page', Auth.requiresLogin, trickController.myTrick)
   .get('/:username', userController.user_profile)
   .get('/:username/:page', userController.user_profile)
-  .get('/', function(req, res){
-    res.redirect('/hall');
-  })
+  .get('/', trickController.homeTrick)
   .param('trickId', API.tricks.load);
 
 module.exports = Route;

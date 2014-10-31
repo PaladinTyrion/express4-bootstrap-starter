@@ -2,7 +2,7 @@ var phantom = require('phantom-render-stream');
 var fs = require('fs');
 var config = require('../config/config');
 //var screenshot = phantom();
-var screenshot = phantom(config.phantomConf);
+var screenShot = phantom(config.phantomConf);
 var utils = require(config.root + '/app/helper/utils');
 var crypto = require('crypto');
 var request = require('request');
@@ -67,7 +67,7 @@ Trick.plugin(CreateUpdatedAt);
 Trick.methods = {
 
   /**
-   * Screenshoot Url
+   * screenShoot Url
    *
    * @param {String} url
    * @param {Function} cb
@@ -100,8 +100,9 @@ Trick.methods = {
 
       var outputStream = fs.createWriteStream(location_screenshoot);
 
-      screenshot(url).pipe(outputStream);
+      screenShot(url).pipe(outputStream);
 
+      console.log(url + ' done.');
       self.save(function (err, doc) {
 
         if (err) {
@@ -141,6 +142,83 @@ Trick.methods = {
             console.log("screenshot the url just finish")
           });
           return utils.responses(res, 200, doc);
+        }
+      });
+    });
+  },
+
+  /**
+   * screenShootBatch
+   *
+   * @param {String} url
+   * @param {Function} cb
+   * @api private
+   */
+  screenShootBatch: function (url, cb) {
+
+    if (!url || !url.length) return this.save(cb);
+
+    var self = this;
+
+    this.validate(function (err) {
+
+      if (err) return cb(err);
+
+      var opts = {
+        format: 'png',
+        width: 1280,
+        height: 960
+      };
+
+      var makeSalt = Math.round((new Date().valueOf() * Math.random())) + '';
+
+      var hasFileName = crypto.createHmac('sha1', makeSalt).update(url).digest('hex');
+
+      self.screenshot = hasFileName + '.' + opts.format;
+
+      var location_screenshoot = config.root + '/public/screenshot/' + hasFileName + '.' + opts.format;
+
+      var outputStream = fs.createWriteStream(location_screenshoot);
+
+      screenShot(url).pipe(outputStream);
+
+      self.save(function (err, doc) {
+
+        if (err) {
+          var errPrint = {};
+
+          if (err.code == 11000) {
+            errPrint.message = 'Trick with title ' + self.title + ' already exist';
+            errPrint.status = 409;
+          } else {
+            errPrint = err;
+            errPrint.status = 409;
+          }
+
+          errPrint.errors = err.errors;
+          console.log(errPrint.message);
+
+        } else {
+
+          outputStream.on('open', function () {
+            console.log('Screenshoot the url is progress');
+            // return utils.responses(res, 206, {message: 'Screenshoot the url is progress', status: 206});
+          });
+
+          outputStream.on('end', function () {
+            console.log("EOF");
+          });
+
+          outputStream.on('error', function (err) {
+            console.log("Error screenshot the url");
+            // err.message = "Error screenshot the url"
+            // return utils.responses(res, 500, err);
+            // outputStream.end();
+          });
+
+          outputStream.on('finish', function () {
+            console.log("screenshot the url just finish")
+          });
         }
       });
     });

@@ -217,9 +217,9 @@ var Trick = App.Trick = {
           }, 3000);
         },
         progressall: function (e, data) {
-            $('#progress').fadeIn();
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .progress-bar').css( 'width', progress + '%');
+          $('#progress').fadeIn();
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .progress-bar').css( 'width', progress + '%');
         }
       }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
     }

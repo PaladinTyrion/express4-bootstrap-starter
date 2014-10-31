@@ -19,13 +19,17 @@ exports.import = function (req, res, next) {
   if ('text/html' == mimeType) {
     var htmlString = fs.readFileSync(filePath).toString();
     var $ = cheerio.load(htmlString);
-    var links = $('body');
+    var links = $('dl');
 
     links.find('a').each(function (i, element) {
+      var getTitle = $(this).text();
+      if(getTitle.length > 12){
+        getTitle = getTitle.substring(0, 12);
+      }
       var newTrick = {
         user: req.user,
         origin_url: $(this).attr('href'),
-        title: $(this).text()
+        title: getTitle
       };
 
       var add_date = moment.unix(_.parseInt($(this).attr('add_date')));
@@ -35,8 +39,7 @@ exports.import = function (req, res, next) {
       var trick = new Trick(newTrick);
 
       if (Validator.isURL(newTrick.origin_url) && !Validator.isNull(newTrick.title)) {
-
-        trick.screenShoot(newTrick.origin_url);
+        trick.screenShootBatch(newTrick.origin_url);
       }
     });
 
@@ -49,6 +52,6 @@ exports.import = function (req, res, next) {
     var errPrint = {};
     errPrint.status = 415;
     errPrint.message = 'Unsupported Media Type';
-    return utils.responses(res, 415, errPrint)
+    return utils.responses(res, 415, errPrint);
   }
 };
