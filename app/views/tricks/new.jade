@@ -18,12 +18,12 @@ block main
         .form-group
           label.col-sm-3.control-label(for='description') Description
           .col-sm-9
-            textarea.form-control#desc(rows="6", name="description", placeholder='Give detailed description of the theater')=trick.description
+            textarea.form-control#desc(rows="6", name="description", placeholder='Give detailed description of the theater', value=trick.description)
 
         .form-group
           label.col-sm-3.control-label(for='tags') Tags
           .col-sm-9
-            input.form-control#tags(type='text', data-role="tagsinput", name="tags", value=trick.tags, placeholder='Enter the tags, seperated with space')
+            input.form-control#tags(type='text', name="tags", value=trick.tags, data-role="tagsinput", placeholder='Enter the tags, seperated with space')
 
         .form-group
           .col-sm-offset-3.col-sm-9

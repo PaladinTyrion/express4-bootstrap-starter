@@ -168,7 +168,7 @@ var Trick = App.Trick = {
         var data = {
           title : formNewTrick.find("input#title").val(),
           origin_url : formNewTrick.find("input#origin_url").val(),
-          description : formNewTrick.find("input#desc").val(),
+          description : formNewTrick.find("textarea#desc").val(),
           tags : $("input#tags").tagsinput('items'),
           '_csrf': $('input[name="_csrf"]').val()
         };
