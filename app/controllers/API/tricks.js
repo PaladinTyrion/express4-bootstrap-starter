@@ -151,13 +151,19 @@ exports.deleteOneTrick = function (trick, next) {
 
   if(!trick) return next();
 
-  trick.is_active = false;
-  trick.updatedAt = new Date().toISOString();
+  var deleteshot = trick.screenshot;
 
-  trick.save(function (err, doc) {
+  var file_screenshoot = config.root + '/public/screenshot/' + deleteshot;
 
+  trick.remove(function (err) {
     if (err) return next(err);
 
-    return next();
+    //delete screenshot image
+    fs.unlink(file_screenshoot, function(err) {
+      if (err) return next(err);
+      return next();
+    });
+
   });
+
 };
