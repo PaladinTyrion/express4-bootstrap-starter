@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# node Start up node server daemon
+#
+# chkconfig: 345 85 15
+# description: Forever for Node.js
+# detail: mv ./nodeforever /etc/init.d/   #CentOS 6.5
+#         cd /etc/init.d/
+#         chkconfig --add nodeforever
+#         chkconfig nodeforever on
+#
+DEAMON=/home/paladin/workplace/express4-bootstrap-starter/server.js
+LOG=/home/paladin/hosts_log
+PID=/home/paladin/tmp/forever.pid
+if [ ! -d $LOG ]; then
+    mkdir -m 755 -p $LOG
+fi
+case "$1" in
+    start)
+        forever start -l $LOG/forever.log -o $LOG/forever_out.log -e $LOG/forever_err.log --pidFile $PID -a $DEAMON
+        ;;
+    stop)
+        forever stop --pidFile $PID $DEAMON
+        ;;
+    stopall)
+        forever stopall --pidFile $PID
+        ;;
+    restartall)
+        forever restartall --pidFile $PID
+        ;;
+    reload|restart)
+        forever restart -l $LOG/forever.log -o $LOG/forever_out.log -e $LOG/forever_err.log --pidFile $PID -a $DEAMON
+        ;;
+    list)
+        forever list
+        ;;
+    *)
+        echo "Usage: /etc.init.d/node {start|stop|restart|reload|stopall|restartall|list}"
+        exit 1
+        ;;
+esac
+exit 0
