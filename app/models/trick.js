@@ -86,8 +86,8 @@ Trick.methods = {
 
       var opts = {
         format: 'png',
-        width: 1280,
-        height: 960
+        width: 760,
+        height: 576
       };
 
       var makeSalt = Math.round((new Date().valueOf() * Math.random())) + '';
@@ -166,8 +166,8 @@ Trick.methods = {
 
       var opts = {
         format: 'png',
-        width: 1280,
-        height: 960
+        width: 760,
+        height: 576
       };
 
       var makeSalt = Math.round((new Date().valueOf() * Math.random())) + '';

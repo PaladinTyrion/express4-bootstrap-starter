@@ -65,7 +65,7 @@ module.exports = (grunt) ->
 
       plugins:
         src: [
-          "public/js/plugins/*"
+          "public/js/plugins/**"
         ]
         dest: "public/js/plugins.js"
 
@@ -93,8 +93,8 @@ module.exports = (grunt) ->
           drop_console: true
       main_script:
         src: [
-          "<%= concat.bootstrap.dest %>"
           "public/js/plugins.js"
+          "<%= concat.bootstrap.dest %>"
           "public/js/apps.js"
         ]
         dest: "public/assets/js/apps.min.js"
@@ -224,5 +224,6 @@ module.exports = (grunt) ->
     "copy"
     "concat"
     "uglify"
+    "nodemon"
   ]
   return

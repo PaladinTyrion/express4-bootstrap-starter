@@ -28,6 +28,7 @@ module.exports = function (app, express, passport) {
     next();
   };
 
+  console.log(env);
   // settings
   app.set('env', env);
   app.set('port', app.config.server.port || 3000);

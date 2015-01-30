@@ -5,6 +5,7 @@ if req.user
 if NODE_ENV == 'development'
   //script.
   //  window.jQuery || document.write('<script src="/js/libs/jquery-2.1.0.min.js"><\/script>')
+  script(src='/js/libs/nprogress.js')
   script(src='/js/bootstrap.js')
   script(src='/js/plugins.js')
   script(src='/js/apps.js')
@@ -15,6 +16,7 @@ if NODE_ENV == 'production'
   //script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js')
   //script.
   //  window.jQuery || document.write('<script src="/js/libs/jquery-2.1.0.min.js"><\/script>')
+  script(src='/js/libs/nprogress.js')
   script(src='/assets/js/apps.min.js')
   if isUnity
     script(src='/assets/js/unity3d.js')

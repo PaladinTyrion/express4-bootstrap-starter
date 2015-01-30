@@ -31,7 +31,7 @@ if(window.isLogin) {
 
         App.User.session = res.data;
 
-        $.jStorage.set("current_user", App.User.session, {TTL : 60000});
+        $.jStorage.set("current_user", App.User.session, {TTL : 15000});
       }
     });
   }

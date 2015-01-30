@@ -48,7 +48,7 @@ exports.delete = function (req, res, next) {
 exports.getAll = function (req, res, next) {
 
   var page = (req.query.page > 0 ? req.query.page : 1) - 1 || 0;
-  var perPage = 15;
+  var perPage = 12;
   var options = {
     perPage: perPage,
     page: page
@@ -105,8 +105,8 @@ exports.screenShootUrl = function (req, res) {
   if (Url) {
     var opts = {
       format: 'png',
-      width: 1280,
-      height: 960
+      width: 760,
+      height: 576
     };
 
     var makeSalt = Math.round((new Date().valueOf() * Math.random())) + '';
