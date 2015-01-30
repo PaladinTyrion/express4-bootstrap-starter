@@ -22,8 +22,10 @@ var config = {
     phantomConf: {
       pool: 8,
       format: 'png',
-      width: 1280,
-      height: 800
+      width: 760,
+      height: 576,
+      timeout: 10000,
+      quality: 10
     },
     twitterAuth: true,
     twitter: {
@@ -61,7 +63,12 @@ var config = {
       name: '3D-Theatres-to-Theater-Chain'
     },
     phantomConf: {
-      timeout: 5000
+      pool: 8,
+      format: 'png',
+      width: 760,
+      height: 576,
+      timeout: 10000,
+      quality: 10
     },
     twitterAuth: true,
     twitter: {

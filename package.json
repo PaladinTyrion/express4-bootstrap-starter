@@ -59,7 +59,7 @@
     "passport-facebook": "^1.0.3",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.2",
-    "phantom-render-stream": "^1.0.4",
+    "phantom-render-stream": "^1.6.0",
     "prettyjson": "^1.0.0",
     "request": "^2.40.0",
     "response-time": "^2.0.*",
