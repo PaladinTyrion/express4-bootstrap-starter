@@ -53,7 +53,8 @@ var Trick = App.Trick = {
       var origin_url = block.data('url');
 
       App.Paginator.currentPage = page > 0 ? page : 1;
-      var pageCount = Math.ceil(parseInt(tricks_count)/15);
+      var pageCount = Math.ceil(parseInt(tricks_count)/12);
+
       App.Paginator.pageCount = pageCount;
 
       if($('.profile-card').length > 0) {

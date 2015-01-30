@@ -77,7 +77,7 @@ exports.listTrickByUser = function (req, res, next) {
   var page = (req.query.page > 0 ? req.query.page : 1) - 1 || 0;
 
 //  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 15;
+  var perPage = 12;
   var options = {
     perPage: perPage,
     page: page
