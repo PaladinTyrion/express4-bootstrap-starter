@@ -3,6 +3,7 @@ var fs = require('fs');
 var config = require('../config/config');
 //var screenshot = phantom();
 var screenShot = phantom(config.phantomConf);
+var sharp = require('sharp');
 var utils = require(config.root + '/app/helper/utils');
 var crypto = require('crypto');
 var request = require('request');
@@ -96,20 +97,20 @@ Trick.methods = {
 
       self.screenshot = hasFileName + '.' + opts.format;
 
-      var location_screenshoot = config.root + '/public/screenshot/' + hasFileName + '.' + opts.format;
+      var location_screenshoot = config.root + '/public/screenshot/tmp/' + hasFileName + '.' + opts.format;
+      var location_final = config.root + '/public/screenshot/' + hasFileName + '.' + opts.format;
 
       var outputStream = fs.createWriteStream(location_screenshoot);
 
       screenShot(url).pipe(outputStream);
 
-      console.log(url + ' done.');
       self.save(function (err, doc) {
 
         if (err) {
           var errPrint = {};
 
           if (err.code == 11000) {
-            errPrint.message = 'Trick with title ' + self.title + ' already exist';
+            errPrint.message = 'Theater with title ' + self.title + ' Or with url ' + self.origin_url + ' already exist';
             errPrint.status = 409;
           } else {
             errPrint = err;
@@ -139,7 +140,14 @@ Trick.methods = {
           });
 
           outputStream.on('finish', function () {
-            console.log("screenshot the url just finish")
+            console.log("screenshot the url just finish");
+            sharp(location_screenshoot).resize(282, 250).toFile(location_final, function(err) {
+              if (err) {
+                throw err;
+              } else {
+                console.log("screenshot resize image just finish");
+              }
+            });
           });
           return utils.responses(res, 200, doc);
         }
@@ -176,7 +184,8 @@ Trick.methods = {
 
       self.screenshot = hasFileName + '.' + opts.format;
 
-      var location_screenshoot = config.root + '/public/screenshot/' + hasFileName + '.' + opts.format;
+      var location_screenshoot = config.root + '/public/screenshot/tmp/' + hasFileName + '.' + opts.format;
+      var location_final = config.root + '/public/screenshot/' + hasFileName + '.' + opts.format;
 
       var outputStream = fs.createWriteStream(location_screenshoot);
 
@@ -188,7 +197,7 @@ Trick.methods = {
           var errPrint = {};
 
           if (err.code == 11000) {
-            errPrint.message = 'Trick with title ' + self.title + ' already exist';
+            errPrint.message = 'Theater with title ' + self.title + ' Or with url ' + self.origin_url + ' already exist';
             errPrint.status = 409;
           } else {
             errPrint = err;
@@ -217,7 +226,14 @@ Trick.methods = {
           });
 
           outputStream.on('finish', function () {
-            console.log("screenshot the url just finish")
+            console.log("screenshot the url just finish");
+            sharp(location_screenshoot).resize(282, 250).toFile(location_final, function(err) {
+              if (err) {
+                throw err;
+              } else {
+                console.log("screenshot resize image just finish");
+              }
+            });
           });
         }
       });

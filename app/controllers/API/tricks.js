@@ -154,6 +154,7 @@ exports.deleteOneTrick = function (trick, next) {
   var deleteshot = trick.screenshot;
 
   var file_screenshoot = config.root + '/public/screenshot/' + deleteshot;
+  //var file_tmpscreenshoot = config.root + '/public/screenshot/tmp/' + deleteshot;
 
   trick.remove(function (err) {
     if (err) return next(err);
@@ -161,8 +162,13 @@ exports.deleteOneTrick = function (trick, next) {
     //delete screenshot image
     fs.unlink(file_screenshoot, function(err) {
       if (err) return next(err);
+      //fs.unlink(file_tmpscreenshoot, function(err) {
+      //  if (err) return next(err);
+      //  return next();
+      //});
       return next();
     });
+
 
   });
 
