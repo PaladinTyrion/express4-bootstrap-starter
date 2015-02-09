@@ -2,33 +2,33 @@ extends ../layouts/default
 
 block main
   .row
-    .col-md-8
+    .col-md-9
       form.form-horizontal.new-trick(method="post", action='/trick/create', role="form")
         input#_csrf(type='hidden', name='_csrf', value=_csrf)
         .form-group
-          label.col-sm-3.control-label(for='title') Theater Title
+          label.col-sm-2.control-label(for='title') 剧场名字
           .col-sm-9
-            input.form-control#title(type='text', name="title", value=trick.title, placeholder='Enter the title')
+            input.form-control#title(type='text', name="title", value=trick.title, placeholder='注册剧场名')
 
         .form-group
-          label.col-sm-3.control-label(for='origin_url') Original Url
+          label.col-sm-2.control-label(for='origin_url') 展示地址
           .col-sm-9
-            input.form-control#origin_url(type='text', name="origin_url", value=trick.origin_url, placeholder='Enter the url')
+            input.form-control#origin_url(type='text', name="origin_url", value=trick.origin_url, placeholder='输入Url剧场展示地址')
 
         .form-group
-          label.col-sm-3.control-label(for='description') Description
+          label.col-sm-2.control-label(for='description') 描述信息
           .col-sm-9
-            textarea.form-control#desc(rows="6", name="description", placeholder='Give detailed description of the theater', value=trick.description)
+            textarea.form-control#desc(rows="6", name="description", placeholder='输入详细剧场描述信息', value=trick.description)
 
         .form-group
-          label.col-sm-3.control-label(for='tags') Tags
+          label.col-sm-2.control-label(for='tags') 标签
           .col-sm-9
-            input.form-control#tags(type='text', name="tags", value=trick.tags, data-role="tagsinput", placeholder='Enter the tags, seperated with space')
+            input.form-control#tags(type='text', name="tags", value=trick.tags, data-role="tagsinput", placeholder='输入标签，用空格分隔')
 
         .form-group
-          .col-sm-offset-3.col-sm-9
+          .col-sm-offset-2.col-sm-9
             button.m-r-md.btn.btn-success.btn-primary(type='submit')
               i.fa.fa-save.text
-                span.m-l-xs.text Save Theater
+                span.m-l-xs.text 保存剧场
 
-            a.btn.btn-cancel.btn-danger(href='/#{req.user.username}/tricks', title="cancel") Cancel
+            a.btn.btn-cancel.btn-danger(href='/#{req.user.username}/tricks', title="cancel") 退出

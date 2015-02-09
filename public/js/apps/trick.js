@@ -184,7 +184,7 @@ var Trick = App.Trick = {
           Notifier.show(res.responseJSON.message, 'err');
         })
         .done(function(res) {
-          Notifier.show("Your Tricks success created");
+          Notifier.show("剧场成功注册！");
 
           formNewTrick.find('input[type=text]').val('');
           formNewTrick.find('textarea').val('');

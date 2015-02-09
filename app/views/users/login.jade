@@ -11,28 +11,28 @@ block form
       input(type='hidden', name='_csrf', value=_csrf)
       .list-group
         .list-group-item
-          input.form-control.no-border(type='text', autocomplete="off" placeholder='Email', name="email")
+          input.form-control.no-border(type='text', autocomplete="off" placeholder='邮箱地址', name="email")
         .list-group-item
-          input.form-control.no-border(type='password', placeholder='Password', name="password")
+          input.form-control.no-border(type='password', placeholder='密码', name="password")
 
-      button.btn.btn-lg.btn-primary.btn-block.btn-login(type='submit') Sign in
+      button.btn.btn-lg.btn-primary.btn-block.btn-login(type='submit') 登录
 
-      a(href="forgot-password" class="forgot-password") Forgot Password
+      a(href="forgot-password" class="forgot-password") 找回密码
 
       .row.m-b
         a.btn.btn-lg.btn-twitter(href="/auth/twitter")
           i.fa.fa-fw.fa-twitter
-          | &nbsp; Sign in with Twitter
+          | &nbsp; &nbsp; Twitter账户登录
 
       .row.m-b
         a.btn.btn-lg.btn-facebook(href="/auth/facebook")
           i.fa.fa-fw.fa-facebook
-          | &nbsp; Sign in with Facebook
+          | &nbsp; Facebook账户登录
 
       div.clearfix
 
       p.line.line-dashed
 
       p.text-muted.text-center
-        small Do not have an account?
-      a.btn.btn-lg.btn-default.btn-block(href='/signup') Create an account
+        small 您是否已经拥有账户?
+      a.btn.btn-lg.btn-default.btn-block(href='/signup') 建立新账户

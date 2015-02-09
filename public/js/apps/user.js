@@ -48,7 +48,7 @@ App.User = _.extend( App.User, {
         .done(function(res) {
           NProgress.done();
           emailInput.val('');
-          Notifier.show('An e-mail has been sent to' + emailInput.val() + ' with further instructions.' )
+          Notifier.show('一封邮件已发送至' + emailInput.val() + '，请参考邮箱指示进行下一步.' )
           btnSubmit.attr('disabled', false);
         });
       }

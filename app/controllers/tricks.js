@@ -27,7 +27,7 @@ exports.myTrick = function (req, res) {
 
   var page = req.param('page') || 0;
   res.render('tricks/tricks-user', {
-    title: 'My Theater',
+    title: '我的剧场',
     page: page,
     origin_url: '/' + current_username + '/tricks/'
   });
@@ -58,7 +58,7 @@ exports.deleteTrick = function(req, res) {
 exports.unityrender = function(req, res) {
 
   res.render('unity3d/unity3d', {
-    title: 'CUC Theater',
+    title: '传媒大学 小剧场',
     isUnity: true
   });
 };

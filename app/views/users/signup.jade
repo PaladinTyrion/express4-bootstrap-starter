@@ -10,16 +10,16 @@ block form
       p.col-sm-offset-2.error= message
       .list-group
         .list-group-item
-          input.form-control.no-border(type='email', name="email", placeholder='Email', value=user.email)
+          input.form-control.no-border(type='email', name="email", placeholder='邮箱地址', value=user.email)
         .list-group-item
-          input.form-control.no-border(type='text', name="username", placeholder='Username', value=user.username)
+          input.form-control.no-border(type='text', name="username", placeholder='用户名', value=user.username)
         .list-group-item
-          input.form-control.no-border(type='password', name="password", placeholder='Password')
+          input.form-control.no-border(type='password', name="password", placeholder='密码')
       //.checkbox.m-b
         label
           input(type='checkbox') | Agree the a(href='#') terms and policy
-      button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign up
+      button.btn.btn-lg.btn-primary.btn-block(type='submit') 注册账户
       .line.line-dashed
       p.text-muted.text-center
-        small Already have an account?
-      a.btn.btn-lg.btn-default.btn-block(href='/login') Sign in
+        small 您是否已经拥有账户？
+      a.btn.btn-lg.btn-default.btn-block(href='/login') 登录账户

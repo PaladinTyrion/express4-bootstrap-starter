@@ -110,7 +110,7 @@ Trick.methods = {
           var errPrint = {};
 
           if (err.code == 11000) {
-            errPrint.message = 'Theater with title ' + self.title + ' Or with url ' + self.origin_url + ' already exist';
+            errPrint.message = '剧场' + self.title + '或者' + self.origin_url + '展示地址已经存在';
             errPrint.status = 409;
           } else {
             errPrint = err;
@@ -197,7 +197,7 @@ Trick.methods = {
           var errPrint = {};
 
           if (err.code == 11000) {
-            errPrint.message = 'Theater with title ' + self.title + ' Or with url ' + self.origin_url + ' already exist';
+            errPrint.message = '剧场' + self.title + '或者' + self.origin_url + '展示地址已经存在';
             errPrint.status = 409;
           } else {
             errPrint = err;

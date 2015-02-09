@@ -61,7 +61,7 @@ exports.signup = function (req, res) {
 
 exports.logout = function (req, res) {
   req.logout();
-  req.flash('success', { msg: 'Success! You are logout' });
+  req.flash('success', { msg: '成功! 已经登出' });
   res.redirect('/');
 };
 
@@ -221,8 +221,8 @@ exports.getResetPassword = function (req, res) {
 
 exports.postResetPassword = function (req, res) {
 
-  req.assert('password', 'Password must be at least 6 characters long.').len(6);
-  req.assert('confirm_password', 'Please enter confirm password same with password.').equals(req.body.password);
+  req.assert('password', '密码长度至少6位.').len(6);
+  req.assert('confirm_password', '请重新输入密码确认.').equals(req.body.password);
 
   var errors = req.validationErrors();
 
@@ -235,7 +235,7 @@ exports.postResetPassword = function (req, res) {
     function (done) {
       User.findOne({ reset_password_token: req.params.token }).where('reset_password_expires').gt(Date.now()).exec(function (err, user) {
         if (!user) {
-          return errorHelper.custom(res, { msg: 'Password reset token is invalid or has expired.', code: 410 });
+          return errorHelper.custom(res, { msg: '重置密码无效或已过期.', code: 410 });
         }
 
         user.password = req.body.password;
@@ -252,11 +252,11 @@ exports.postResetPassword = function (req, res) {
     }], function (user) {
     user.url_login = req.protocol + '://' + req.headers.host + '/login';
 
-    Mailer.sendOne('reset-password', "3D Theaters - Your password has been changed", user, function (err, responseStatus, html, text) {
+    Mailer.sendOne('reset-password', "3D 剧场 - 您的密码已经修改成功", user, function (err, responseStatus, html, text) {
       if (err) {
         return errorHelper.custom(res, { msg: err, code: 500 });
       } else {
-        return res.json({message: 'Success! Your password has been changed.', code: 200 });
+        return res.json({message: '成功! 您的密码已经修改成功.', code: 200 });
       }
     });
   });

@@ -10,16 +10,16 @@ block main
         p
           span.label.label-primary
             span.tricks-count 0
-            | &nbsp; Tricks
+            | &nbsp; 剧场
 
           | &nbsp;
-          span.label.label-success 0 Stars
+          span.label.label-success 0 关注
         p
           a.btn.btn-xs.btn-lightorange(href='#')
-            span.fa.fa-envelope-o &nbsp; Message
+            span.fa.fa-envelope-o &nbsp; 信息
           | &nbsp;
           a.btn.btn-xs.btn-lightorange(href='#')
-            span.fa.fa-star &nbsp; Favorite
+            span.fa.fa-star &nbsp; 喜欢
 
   section.m-t-md.block-tricks-user.block-tricks(data-id="#{user._id}", data-username="#{user.username}", data-page="#{page}", data-url="#{origin_url}")
     .clearfix
