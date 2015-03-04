@@ -1,4 +1,4 @@
-![ExpressJS 4 Starter](http://express4-bootstrap-starter.tukangslicing.net/apple-touch-icon-114-precomposed.png)
+![ExpressJS 4 Starter](https://github.com/aredo/express4-bootstrap-starter/raw/master/public/apple-touch-icon-144-precomposed.png)
 
 ExpressJS 4 Starter
 ==========================
@@ -13,7 +13,7 @@ Lightweight Bootstrap NodeJS Apps Build Using ExpressJS 4, MongoDB/Mongoose, Aut
 ## Install
 
 ### Prerequisites
-- Node.js - Download and Install Node.js with [n](https://github.com/visionmedia/n) (Node Version Manager) - Simple module to manage multiple active node.js versions.
+- Node.js - Download and Install Node.js with [N](https://github.com/visionmedia/n) (Node Version Manager) - Simple module to manage multiple active node.js versions.
 **NOTE:** This project uses node v0.10.28.
 - MongoDB - Download and Install [MongoDB](http://www.mongodb.org/) - Make sure it's running on the default port.
 
@@ -25,16 +25,21 @@ Lightweight Bootstrap NodeJS Apps Build Using ExpressJS 4, MongoDB/Mongoose, Aut
 ### Javascript Tools Used
 - [Grunt](http://gruntjs.com/) - In one word: automation. The less work you have to do when performing repetitive tasks like minification, compilation, unit testing, linting, etc, the easier your job becomes. After you've configured it, a Grunt can do most of that mundane work for you—and your team—with basically zero effort.
 
+### Tools Needs to be Installed Globally
 
 **NOTE:**
-After installing  Node.js and MongoDB server has running, then its time to running your server.
+After installing Node.js and MongoDB server has running, then its time to running your server.
 
 **NOTE:**
 Need installing grunt-cli -g. It refers to http://blog.csdn.net/lihongxun945/article/details/8895208 and http://www.gruntjs.org/.
 
 **NOTE:**
-Need installing plantomjs globally, because url-to-screenshot@0.4.1 is dependent on plantomjs.
+Need installing plantomjs globally, because url-to-screenshot@0.9.1 is dependent on plantomjs.
 You can install plantomjs via `$ brew install plantomjs` on OSX.
+If you use other *nix system，you can refer to [HERE](http://phantomjs.org/build.html).
+
+**NOTE:**
+Need isntalling `pkg-config` && `libvips`. They supports the package of `sharp@0.4.1` running well. You can install them referring to [HERE](https://www.npmjs.com/package/sharp) or [Libvips Homepage](https://github.com/jcupitt/libvips).
 
 ```
   $ npm install -g grunt-cli
@@ -86,6 +91,7 @@ Then visit [http://localhost:3001/](http://localhost:3001/)
   |__mustache (Template for items)
   |__unity3d (.unity3d && std.xml)
   |__screenhot (user mkdir)
+  	    |__tmp (user mkdir)  
   favicon.ico
 -Grunfile.coffee
 ```
